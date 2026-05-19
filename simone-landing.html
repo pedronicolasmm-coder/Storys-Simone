@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simone Welter Bicca — Gestão da Receptividade</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --marrom:#2C1A0E;
+  --marrom-mid:#4A2C1A;
+  --amarelo:#F5A623;
+  --amarelo-clr:#FFF8E7;
+  --amarelo-suave:#FFF3DC;
+  --creme:#FEF6EC;
+  --branco:#FFFFFF;
+  --texto:#1A1A1A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--creme);color:var(--texto);overflow-x:hidden;}
+
+/* ── BARRAS LATERAIS ── */
+.barra{position:fixed;top:0;bottom:0;width:26px;background:var(--marrom);z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
+.barra.esq{left:0;}.barra.dir{right:0;}
+.bd{width:5px;height:5px;border-radius:50%;background:var(--amarelo);opacity:.55;}
+.bd.ativo{opacity:1;width:7px;height:7px;}
+
+.pg{margin:0 26px;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:26px;right:26px;z-index:200;
+  background:rgba(44,26,14,.96);backdrop-filter:blur(10px);
+  padding:0 48px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(245,166,35,.15);
+}
+.nav-logo{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--branco);letter-spacing:.5px;}
+.nav-logo em{font-style:italic;color:var(--amarelo);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--amarelo);}
+.nav-cta{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--amarelo);color:var(--marrom);padding:8px 20px;border-radius:30px;text-decoration:none;transition:transform .2s,box-shadow .2s;}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,166,35,.4);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;background:var(--marrom);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:100px 48px 80px;
+  position:relative;overflow:hidden;
+}
+.hero-mandala{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;opacity:.05;animation:spin 100s linear infinite;}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg);}}
+
+.bfly{position:absolute;animation:flutter 7s ease-in-out infinite;opacity:.16;}
+@keyframes flutter{0%,100%{transform:translateY(0) rotate(-5deg);}50%{transform:translateY(-16px) rotate(5deg);}}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.3);
+  color:var(--amarelo);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:7px 18px;border-radius:30px;margin-bottom:32px;
+  position:relative;z-index:1;
+  animation:fadeUp .8s ease both;
+}
+.hero-badge span{width:6px;height:6px;border-radius:50%;background:var(--amarelo);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.7);}}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(44px,7vw,96px);font-weight:900;
+  color:var(--branco);line-height:.95;margin-bottom:20px;
+  position:relative;z-index:1;
+  animation:fadeUp .9s ease .1s both;
+}
+.hero h1 em{font-style:italic;color:var(--amarelo);}
+.hero h1 .linha2{display:block;font-size:clamp(28px,4vw,56px);color:rgba(255,255,255,.55);font-weight:400;margin-top:8px;}
+
+.hero-sub{
+  font-size:clamp(15px,1.8vw,19px);color:rgba(255,255,255,.62);
+  max-width:560px;line-height:1.7;margin-bottom:48px;
+  position:relative;z-index:1;
+  animation:fadeUp 1s ease .2s both;
+}
+
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;animation:fadeUp 1s ease .3s both;}
+.btn-pri{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--amarelo);color:var(--marrom);
+  font-size:14px;font-weight:700;padding:15px 32px;border-radius:50px;
+  text-decoration:none;transition:transform .2s,box-shadow .2s;
+  box-shadow:0 8px 30px rgba(245,166,35,.4);
+}
+.btn-pri:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(245,166,35,.55);}
+.btn-sec{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:rgba(255,255,255,.7);
+  font-size:14px;font-weight:600;padding:15px 32px;border-radius:50px;
+  text-decoration:none;border:1px solid rgba(255,255,255,.2);
+  transition:border-color .2s,color .2s;
+}
+.btn-sec:hover{border-color:var(--amarelo);color:var(--amarelo);}
+
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.3);font-size:10px;letter-spacing:2px;text-transform:uppercase;animation:fadeUp 1.2s ease .6s both;}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,transparent,var(--amarelo));animation:scrollPulse 2s ease-in-out infinite;}
+@keyframes scrollPulse{0%,100%{opacity:.3;}50%{opacity:1;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── NÚMEROS ── */
+.sec-nums{background:var(--amarelo);padding:52px 48px;}
+.nums-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+.num-item{text-align:center;padding:0 24px;border-right:1px solid rgba(44,26,14,.15);}
+.num-item:last-child{border-right:none;}
+.num-big{font-family:'Playfair Display',serif;font-size:clamp(40px,6vw,72px);font-weight:900;color:var(--marrom);line-height:1;}
+.num-label{font-size:13px;font-weight:600;color:rgba(44,26,14,.65);margin-top:6px;line-height:1.4;}
+
+/* ── SEÇÃO GENÉRICA ── */
+.sec{padding:90px 48px;max-width:1100px;margin:0 auto;}
+.sec-label{display:block;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--amarelo);margin-bottom:12px;}
+.sec-titulo{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,48px);font-weight:700;color:var(--marrom);line-height:1.15;margin-bottom:40px;}
+.sec-titulo em{font-style:italic;color:var(--amarelo);}
+
+/* ── SINAIS ── */
+.sinais-wrap{background:var(--branco);}
+.sinais-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.sinal-card{
+  background:var(--creme);border-radius:18px;padding:28px 26px;
+  border-top:4px solid var(--amarelo);
+  transition:transform .25s,box-shadow .25s;
+}
+.sinal-card:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(44,26,14,.1);}
+.sinal-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:rgba(245,166,35,.25);line-height:1;margin-bottom:10px;}
+.sinal-titulo{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--marrom);margin-bottom:10px;}
+.sinal-titulo em{font-style:italic;color:var(--amarelo);}
+.sinal-txt{font-size:14px;color:#666;line-height:1.7;}
+
+/* ── MÉTODO ── */
+.metodo-wrap{background:var(--marrom);}
+.metodo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;}
+.metodo-step{
+  background:rgba(255,255,255,.04);padding:40px 32px;
+  border-right:1px solid rgba(245,166,35,.1);
+  transition:background .2s;
+}
+.metodo-step:last-child{border-right:none;}
+.metodo-step:hover{background:rgba(245,166,35,.06);}
+.step-n{font-family:'Playfair Display',serif;font-size:64px;font-weight:900;color:rgba(245,166,35,.15);line-height:1;margin-bottom:16px;}
+.step-titulo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--branco);margin-bottom:12px;}
+.step-titulo em{font-style:italic;color:var(--amarelo);}
+.step-txt{font-size:14px;color:rgba(255,255,255,.6);line-height:1.7;}
+.step-badge{display:inline-block;margin-top:14px;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);color:var(--amarelo);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;}
+
+/* ── DIFERENÇA ── */
+.diff-wrap{background:var(--creme);}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.diff-card{border-radius:20px;padding:36px 32px;}
+.diff-card.ruim{background:rgba(44,26,14,.06);border:1px solid rgba(44,26,14,.1);}
+.diff-card.bom{background:var(--marrom);color:var(--branco);}
+.diff-tipo{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+.diff-card.ruim .diff-tipo{color:#999;}
+.diff-card.bom .diff-tipo{color:var(--amarelo);}
+.diff-titulo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:16px;line-height:1.2;}
+.diff-card.ruim .diff-titulo{color:var(--marrom);}
+.diff-card.bom .diff-titulo{color:var(--branco);}
+.diff-card.bom .diff-titulo em{font-style:italic;color:var(--amarelo);}
+.diff-lista{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.diff-lista li{font-size:14px;line-height:1.6;display:flex;gap:10px;align-items:flex-start;}
+.diff-card.ruim .diff-lista li{color:#666;}
+.diff-card.bom .diff-lista li{color:rgba(255,255,255,.78);}
+.diff-lista li::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+.diff-card.ruim .diff-lista li::before{background:#ccc;}
+.diff-card.bom .diff-lista li::before{background:var(--amarelo);}
+
+/* ── CTA FINAL ── */
+.cta-final{
+  background:var(--amarelo);padding:100px 48px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.cta-mandala{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;opacity:.07;animation:spin 120s linear infinite;}
+.cta-inner{max-width:640px;margin:0 auto;position:relative;z-index:1;}
+.cta-inner h2{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,60px);font-weight:900;color:var(--marrom);line-height:1.05;margin-bottom:20px;}
+.cta-inner h2 em{font-style:italic;}
+.cta-inner p{font-size:16px;color:rgba(44,26,14,.7);margin-bottom:40px;line-height:1.7;}
+.cta-palavra{display:inline-block;background:rgba(44,26,14,.1);border:1.5px solid rgba(44,26,14,.2);color:var(--marrom);font-size:13px;font-weight:700;letter-spacing:2px;padding:8px 20px;border-radius:30px;margin-bottom:28px;}
+.btn-escuro{display:inline-flex;align-items:center;gap:10px;background:var(--marrom);color:var(--amarelo);font-size:15px;font-weight:700;padding:17px 40px;border-radius:50px;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 30px rgba(44,26,14,.3);}
+.btn-escuro:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(44,26,14,.45);}
+
+/* ══════════════════════════════
+   STORIES
+══════════════════════════════ */
+.stories-wrap{background:var(--marrom);padding:90px 0;}
+.stories-header{padding:0 48px 48px;max-width:1100px;margin:0 auto;}
+.stories-header .sec-label{color:rgba(255,255,255,.45);}
+.stories-header .sec-titulo{color:var(--branco);margin-bottom:0;}
+
+/* tabs */
+.stories-tabs{display:flex;gap:10px;padding:0 48px;margin-bottom:36px;flex-wrap:wrap;max-width:1100px;margin-left:auto;margin-right:auto;}
+.tab{
+  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:8px 18px;border-radius:30px;cursor:pointer;border:none;
+  background:rgba(255,255,255,.07);color:rgba(255,255,255,.45);
+  transition:background .2s,color .2s;
+}
+.tab.ativo,.tab:hover{background:var(--amarelo);color:var(--marrom);}
+
+/* sequência */
+.seq-container{padding:0 48px;max-width:1100px;margin:0 auto;}
+.seq{display:none;}
+.seq.ativo{display:block;}
+
+.seq-info{margin-bottom:28px;}
+.seq-nome{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--branco);margin-bottom:6px;}
+.seq-nome em{font-style:italic;color:var(--amarelo);}
+.seq-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;}
+.seq-badge-caixinha{display:inline-flex;align-items:center;gap:6px;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);color:var(--amarelo);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-top:8px;}
+
+/* cards de story */
+.stories-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+.story-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(245,166,35,.15);
+  border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:background .2s,transform .2s;
+}
+.story-card:hover{background:rgba(245,166,35,.07);transform:translateY(-4px);}
+.story-num{
+  background:var(--amarelo);color:var(--marrom);
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:6px 12px;
+}
+.story-body{padding:16px 14px;flex:1;display:flex;flex-direction:column;gap:8px;}
+.story-tipo{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);}
+.story-titulo{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--branco);line-height:1.3;}
+.story-titulo em{font-style:italic;color:var(--amarelo);}
+.story-txt{font-size:11px;color:rgba(255,255,255,.55);line-height:1.55;flex:1;}
+.story-cta{margin-top:8px;font-size:10px;font-weight:700;color:var(--amarelo);letter-spacing:.5px;}
+.story-caixinha{
+  background:rgba(245,166,35,.1);border:1px dashed rgba(245,166,35,.4);
+  border-radius:8px;padding:8px 10px;margin-top:6px;
+  font-size:10px;color:var(--amarelo);line-height:1.5;
+  display:flex;align-items:flex-start;gap:6px;
+}
+.story-caixinha::before{content:'❓';font-size:12px;flex-shrink:0;}
+
+/* ── FOOTER ── */
+footer{background:var(--marrom);padding:36px 48px;text-align:center;border-top:1px solid rgba(245,166,35,.1);}
+footer p{color:rgba(255,255,255,.35);font-size:13px;}
+footer strong{color:var(--amarelo);}
+
+/* responsivo */
+@media(max-width:900px){
+  .stories-row{grid-template-columns:repeat(3,1fr);}
+  .diff-grid{grid-template-columns:1fr;}
+  .nums-inner{grid-template-columns:1fr;gap:28px;}
+  .num-item{border-right:none;border-bottom:1px solid rgba(44,26,14,.15);padding-bottom:24px;}
+  .num-item:last-child{border-bottom:none;}
+}
+@media(max-width:680px){
+  .barra{width:14px;}.pg{margin:0 14px;}
+  nav{left:14px;right:14px;padding:0 20px;}
+  .nav-links{display:none;}
+  .stories-row{grid-template-columns:repeat(2,1fr);}
+  .stories-tabs,.seq-container,.stories-header{padding-left:20px;padding-right:20px;}
+  .sec{padding:60px 20px;}
+  .metodo-grid{grid-template-columns:1fr;}
+  .cta-final{padding:70px 20px;}
+}
+</style>
+</head>
+<body>
+
+<div class="barra esq"><div class="bd ativo"></div><div class="bd"></div><div class="bd"></div><div class="bd"></div><div class="bd"></div></div>
+<div class="barra dir"><div class="bd ativo"></div><div class="bd"></div><div class="bd"></div><div class="bd"></div><div class="bd"></div></div>
+
+<div class="pg">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Simone <em>Welter</em></div>
+  <ul class="nav-links">
+    <li><a href="#sinais">Sinais</a></li>
+    <li><a href="#metodo">Método</a></li>
+    <li><a href="#diferenca">Diferença</a></li>
+    <li><a href="#stories">Stories</a></li>
+  </ul>
+  <a href="https://wa.me/5555999660224?text=EMPRESA" class="nav-cta" target="_blank">Falar no direct</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-mandala" viewBox="0 0 400 400" fill="none"><g stroke="#F5A623" stroke-width=".6"><circle cx="200" cy="200" r="190"/><circle cx="200" cy="200" r="158"/><circle cx="200" cy="200" r="126"/><circle cx="200" cy="200" r="94"/><circle cx="200" cy="200" r="62"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(0 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(30 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(60 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(90 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(120 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(150 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(180 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(210 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(240 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(270 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(300 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(330 200 200)"/></g></svg>
+
+  <svg class="bfly" style="top:15%;left:6%;width:58px;" viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".7"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".45"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".3"/></svg>
+  <svg class="bfly" style="bottom:22%;right:7%;width:42px;animation-delay:3s;" viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".7"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".45"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".3"/></svg>
+  <svg class="bfly" style="top:60%;left:12%;width:32px;animation-delay:1.5s;" viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".7"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".45"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".3"/></svg>
+
+  <div class="hero-badge"><span></span>@simonewelterb · Gestão da Receptividade</div>
+  <h1>Sua equipe atende.<br><em>Mas acolhe?</em><span class="linha2">Diagnóstico + treinamento que muda atitude de verdade.</span></h1>
+  <p class="hero-sub">Não é palestra solta. É um processo desenhado pra realidade da sua empresa — comportamento, emocional e receptividade na prática.</p>
+  <div class="hero-btns">
+    <a href="https://wa.me/5555999660224?text=EMPRESA" class="btn-pri" target="_blank">🦋 Me manda EMPRESA no direct</a>
+    <a href="#sinais" class="btn-sec">Ver os sinais →</a>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>rolar</span></div>
+</section>
+
+<!-- NÚMEROS -->
+<div class="sec-nums">
+  <div class="nums-inner">
+    <div class="num-item"><div class="num-big">20h</div><div class="num-label">média de treinamento<br>por empresa</div></div>
+    <div class="num-item"><div class="num-big">2x</div><div class="num-label">encontros por semana<br>na rotina da equipe</div></div>
+    <div class="num-item"><div class="num-big">100%</div><div class="num-label">personalizado<br>pra sua realidade</div></div>
+  </div>
+</div>
+
+<!-- SINAIS -->
+<div class="sinais-wrap" id="sinais">
+  <div class="sec">
+    <span class="sec-label">Os sinais</span>
+    <h2 class="sec-titulo">3 sinais que a maioria dos gestores ignora<br><em>até o cliente ir embora</em></h2>
+    <div class="sinais-grid">
+      <div class="sinal-card">
+        <div class="sinal-num">01</div>
+        <div class="sinal-titulo">Sua equipe atende,<br><em>mas não acolhe</em></div>
+        <div class="sinal-txt">Resolver o problema do cliente é o mínimo. O que fideliza é fazer ele se sentir visto, ouvido e bem-vindo. Isso é receptividade.</div>
+      </div>
+      <div class="sinal-card">
+        <div class="sinal-num">02</div>
+        <div class="sinal-titulo">O clima interno<br><em>está pesado</em></div>
+        <div class="sinal-txt">Equipe que não se acolhe entre si não consegue acolher o cliente. Clima organizacional e atendimento estão diretamente ligados.</div>
+      </div>
+      <div class="sinal-card">
+        <div class="sinal-num">03</div>
+        <div class="sinal-titulo">Os treinamentos anteriores<br><em>não mudaram nada</em></div>
+        <div class="sinal-txt">Se o comportamento não mudou, o modelo estava errado. Não a sua equipe. Treinamento genérico não resolve problema real.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MÉTODO -->
+<div class="metodo-wrap" id="metodo">
+  <div class="sec">
+    <span class="sec-label" style="color:rgba(255,255,255,.45);">O método</span>
+    <h2 class="sec-titulo" style="color:var(--branco);">O que eu faço quando entro<br><em>na sua empresa</em></h2>
+  </div>
+  <div class="metodo-grid">
+    <div class="metodo-step">
+      <div class="step-n">1</div>
+      <div class="step-titulo">Primeiro eu<br><em>escuto você</em></div>
+      <div class="step-txt">Entendo seus desafios com equipe, atendimento, clima e liderança. Começo pela realidade da empresa. Nada de pacote pronto.</div>
+    </div>
+    <div class="metodo-step">
+      <div class="step-n">2</div>
+      <div class="step-titulo">Depois faço um<br><em>diagnóstico</em></div>
+      <div class="step-txt">Observo o dia a dia, converso com a equipe, entrego um raio-X claro dos pontos fortes e dos pontos críticos.</div>
+    </div>
+    <div class="metodo-step">
+      <div class="step-n">3</div>
+      <div class="step-titulo">Treinamento<br><em>na medida certa</em></div>
+      <div class="step-txt">Com o diagnóstico em mãos, monto um processo só pra sua empresa. Comportamento, emocional e receptividade na prática.</div>
+      <span class="step-badge">Média 20h · 2x por semana</span>
+    </div>
+    <div class="metodo-step">
+      <div class="step-n">✓</div>
+      <div class="step-titulo">Resultado que<br><em>fica de verdade</em></div>
+      <div class="step-txt">A equipe começa a mudar postura durante o processo, não só depois que acaba. Mudança que aparece na segunda de manhã.</div>
+    </div>
+  </div>
+</div>
+
+<!-- DIFERENÇA -->
+<div class="diff-wrap" id="diferenca">
+  <div class="sec">
+    <span class="sec-label">A diferença</span>
+    <h2 class="sec-titulo">Atendimento bom e atendimento<br><em>receptivo não são a mesma coisa</em></h2>
+    <div class="diff-grid">
+      <div class="diff-card ruim">
+        <div class="diff-tipo">Atendimento comum</div>
+        <div class="diff-titulo">Resolve. Responde rápido. Segue o script.</div>
+        <ul class="diff-lista">
+          <li>O cliente sai satisfeito, mas não necessariamente volta</li>
+          <li>A equipe executa, mas não se conecta</li>
+          <li>Funciona no automático, sem presença real</li>
+          <li>O cliente percebe — mesmo sem conseguir nomear</li>
+        </ul>
+      </div>
+      <div class="diff-card bom">
+        <div class="diff-tipo">Atendimento receptivo</div>
+        <div class="diff-titulo">O cliente se sente visto, ouvido e <em>bem-vindo.</em></div>
+        <ul class="diff-lista">
+          <li>O cliente volta. E indica para outros</li>
+          <li>A equipe recebe a pessoa antes de abrir a boca</li>
+          <li>Não é sobre técnica — é sobre como a equipe está</li>
+          <li>É o que sustenta empresa de serviço a longo prazo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA CENTRAL -->
+<div class="cta-final">
+  <svg class="cta-mandala" viewBox="0 0 400 400" fill="none"><g stroke="#2C1A0E" stroke-width=".7"><circle cx="200" cy="200" r="185"/><circle cx="200" cy="200" r="148"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(0 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(30 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(60 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(90 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(120 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(150 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(180 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(210 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(240 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(270 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(300 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(330 200 200)"/></g></svg>
+  <div class="cta-inner">
+    <span class="sec-label" style="color:rgba(44,26,14,.55);">Próximo passo</span>
+    <h2>Quer isso com a<br><em>sua equipe?</em></h2>
+    <p>Se você é dono ou gestor de empresa de médio porte e quer uma equipe que realmente muda o jeito de atender e se relacionar, a conversa começa aqui.</p>
+    <div class="cta-palavra">Manda a palavra: EMPRESA</div><br><br>
+    <a href="https://wa.me/5555999660224?text=EMPRESA" class="btn-escuro" target="_blank">🦋 Falar com a Simone no WhatsApp</a>
+  </div>
+</div>
+
+<!-- ══ STORIES ══ -->
+<div class="stories-wrap" id="stories">
+  <div class="stories-header">
+    <span class="sec-label">10 ideias de sequências</span>
+    <h2 class="sec-titulo" style="color:var(--branco);margin-bottom:8px;">Stories para o <em>próximo mês</em></h2>
+    <p style="font-size:14px;color:rgba(255,255,255,.45);line-height:1.6;">Cada sequência tem 5 stories. As marcadas com ❓ incluem caixinha de perguntas.</p>
+  </div>
+
+  <div class="stories-tabs" id="tabsContainer">
+    <button class="tab ativo" onclick="mostraSeq(0)">S1</button>
+    <button class="tab" onclick="mostraSeq(1)">S2 ❓</button>
+    <button class="tab" onclick="mostraSeq(2)">S3</button>
+    <button class="tab" onclick="mostraSeq(3)">S4</button>
+    <button class="tab" onclick="mostraSeq(4)">S5</button>
+    <button class="tab" onclick="mostraSeq(5)">S6 ❓</button>
+    <button class="tab" onclick="mostraSeq(6)">S7</button>
+    <button class="tab" onclick="mostraSeq(7)">S8</button>
+    <button class="tab" onclick="mostraSeq(8)">S9</button>
+    <button class="tab" onclick="mostraSeq(9)">S10</button>
+  </div>
+
+  <div class="seq-container">
+
+    <!-- S1 -->
+    <div class="seq ativo" id="seq0">
+      <div class="seq-info">
+        <div class="seq-nome">S1 — <em>Bastidor do treinamento</em></div>
+        <div class="seq-desc">Mostrar o processo por dentro. Equipe em roda, dinâmica, vivência real.</div>
+      </div>
+      <div class="stories-row">
+        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Abertura · Gancho</div><div class="story-titulo">Hoje você vai ver como é por dentro um treinamento de verdade</div><div class="story-txt">Foto ou vídeo curto dela chegando no local. "Hoje tem treinamento e você vai acompanhar tudo."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Contexto</div><div class="story-titulo">Antes de qualquer coisa, eu escuto</div><div class="story-txt">Ela sentada com gestor ou equipe. "Primeiro eu entendo a realidade deles. Só depois começa."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Vivência</div><div class="story-titulo"><em>A roda começa</em></div><div class="story-txt">Vídeo da equipe em círculo. "Esse é o momento em que as pessoas param de se defender e começam a se ouvir."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Revelação</div><div class="story-titulo">O que aparece quando a equipe se permite</div><div class="story-txt">Momento de conexão — abraço, sorriso, olhar. "Aqui é onde o comportamento começa a mudar de verdade."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Quer esse processo na sua empresa?</div><div class="story-txt">Ela olhando pra câmera. "Me manda uma mensagem com a palavra EMPRESA e a gente conversa."</div><div class="story-cta">CTA: EMPRESA no direct</div></div></div>
+      </div>
+    </div>
+
+    <!-- S2 — CAIXINHA -->
+    <div class="seq" id="seq1">
+      <div class="seq-info">
+        <div class="seq-nome">S2 — <em>Caixinha: o gestor pergunta</em></div>
+        <div class="seq-desc">Caixinha de perguntas voltada para donos e gestores. Gera engajamento e aquece leads.</div>
+        <div class="seq-badge-caixinha">Caixinha de perguntas</div>
+      </div>
+      <div class="stories-row">
+        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Abertura</div><div class="story-titulo">Todo gestor tem dúvida antes de investir em treinamento</div><div class="story-txt">Ela séria, direta. "Vou responder as suas agora. Me manda sua pergunta aqui."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Caixinha</div><div class="story-titulo"><em>Pergunta aqui:</em> o que você ainda não entendeu sobre treinamento de equipe?</div><div class="story-txt">Sticker de caixinha de perguntas aberto. Exemplos na tela: "Como funciona? Serve pra minha empresa? Quanto tempo leva?"</div><div class="story-caixinha">Caixinha aberta para gestores</div></div></div>
+        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Resposta 1</div><div class="story-titulo">Respondendo: "Serve pra qualquer empresa?"</div><div class="story-txt">"Não. Só trabalho com empresas de médio porte de serviços — porque começo pelo diagnóstico da sua realidade."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Resposta 2</div><div class="story-titulo">Respondendo: "Preciso liberar todo mundo?"</div><div class="story-txt">"Não. Os encontros são planejados junto com você pra encaixar na rotina sem travar a operação."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Ficou com dúvida? Me chama.</div><div class="story-txt">"Se você é dono ou gestor e ainda tem pergunta, me manda EMPRESA no direct. A gente conversa antes de qualquer decisão."</div><div class="story-cta">CTA: EMPRESA no direct</div></div></div>
+      </div>
+    </div>
+
+    <!-- S3 -->
+    <div class="seq" id="seq2">
+      <div class="seq-info">
+        <div class="seq-nome">S3 — <em>NR1 explicada em 5 stories</em></div>
+        <div class="seq-desc">Educar o gestor sobre a obrigação legal. Urgência real, sem alarmar.</div>
+      </div>
+      <div class="stories-row">
+        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Gancho</div><div class="story-titulo">Você sabia que a NR1 mudou em 2025?</div><div class="story-txt">"E a maioria das empresas de médio porte ainda não se adequou. Desliza pra entender."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Educação</div><div class="story-titulo">O que mudou na lei</div><div class="story-txt">"Toda empresa com CLT agora precisa identificar e gerenciar riscos psicossociais. Não é recomendação. É obrigação."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">O que inclui</div><div class="story-titulo">O que são riscos psicossociais?</div><div class="story-txt">"Assédio, sobrecarga, conflito entre equipes, clima hostil. Tudo isso precisa estar documentado e gerenciado."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Consequência</div><div class="story-titulo">O que acontece se não tiver?</div><div class="story-txt">"Multa. Ação trabalhista. E descobrir por uma fiscalização que sua equipe estava sofrendo e você não sabia."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Não sabe se sua empresa está em conformidade?</div><div class="story-txt">"Me manda NR1 no direct que eu te explico como funciona o diagnóstico."</div><div class="story-cta">CTA: NR1 no direct</div></div></div>
+      </div>
+    </div>
+
+    <!-- S4 -->
+    <div class="seq" id="seq3">
+      <div class="seq-info">
+        <div class="seq-nome">S4 — <em>Antes e depois sem citar nomes</em></div>
+        <div class="seq-desc">Prova social. Mostrar transformação real sem expor o cliente.</div>
+      </div>
+      <div class="stories-row">
+        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Gancho</div><div class="story-titulo">Vou te contar como essa equipe chegou — e como saiu</div><div class="story-txt">"Sem citar nomes. Só resultados. Desliza."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Antes</div><div class="story-titulo">Como chegaram no primeiro encontro</div><div class="story-txt">"Equipe travada. Respostas defensivas. Clima pesado entre setores. Liderança sobrecarregada."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">O processo</div><div class="story-titulo">O que trabalhamos em 20 horas</div><div class="story-txt">"Comportamento, emocional, receptividade, comunicação entre equipe e liderança. Na prática, não em slide."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Depois</div><div class="story-titulo"><em>Como saíram no último encontro</em></div><div class="story-txt">"Equipe mais receptiva. Clima mais leve. Atendimento mais humano. Liderança com mais respaldo."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Quer ver isso acontecer na sua empresa?</div><div class="story-txt">"Me manda EMPRESA no direct. A transformação começa com uma conversa."</div><div class="story-cta">CTA: EMPRESA no direct</div></div></div>
+      </div>
+    </div>
+
+    <!-- S5 -->
+    <div class="seq" id="seq4">
+      <div class="seq-info">
+        <div class="seq-nome">S5 — <em>Dia de treinamento ao vivo</em></div>
+        <div class="seq-desc">Cobertura em tempo real de um dia de treinamento. Humaniza e gera curiosidade.</div>
+      </div>
+      <div class="stories-row">
+        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Abertura</div><div class="story-titulo">Hoje tem treinamento. Você vai acompanhar.</div><div class="story-txt">Ela no caminho ou chegando. "Hoje a gente entra em mais uma empresa. Vou mostrar aqui como é."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Chegada</div><div class="story-titulo">Antes de começar</div><div class="story-txt">Foto do espaço ou equipe se organizando. "Cada empresa tem uma realidade diferente. Por isso começo sempre escutando."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Durante</div><div class="story-titulo"><em>A vivência acontecendo</em></div><div class="story-txt">Vídeo ou foto da dinâmica. "Esse é o momento que não tem em slide nenhum. É sentir na pele."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Encerramento</div><div class="story-titulo">Como essa equipe saiu hoje</div><div class="story-txt">Foto do grupo ao final. "Equipe diferente de como entrou. É isso que 20h de processo fazem."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Quer isso com a sua equipe?</div><div class="story-txt">"Me manda EMPRESA no direct e a gente começa pela conversa."</div><div class="story-cta">CTA: EMPRESA no direct</div></div></div>
+      </div>
+    </div>
+
+    <!-- S6 — CAIXINHA -->
+    <div class="seq" id="seq5">
+      <div class="seq-info">
+        <div class="seq-nome">S6 — <em>Caixinha: sua equipe te preocupa?</em></div>
+        <div class="seq-desc">Caixinha voltada para a dor do gestor. Gera identificação e aquece para o direct.</div>
+        <div class="seq-badge-caixinha">Caixinha de perguntas</div>
+      </div>
+      <div class="stories-row">
+        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Gancho</div><div class="story-titulo">Se você é dono ou gestor, preciso te perguntar uma coisa</div><div class="story-txt">"Tem alguma situação com sua equipe que te preocupa mas você não sabe bem como resolver? Me conta aqui."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Caixinha</div><div class="story-titulo"><em>Me conta:</em> qual é o maior problema que você enfrenta com sua equipe hoje?</div><div class="story-txt">Sticker de caixinha aberto. Exemplos na tela: "Clima ruim? Atendimento fraco? Equipe no automático?"</div><div class="story-caixinha">Caixinha aberta para gestores</div></div></div>
+        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Resposta 1</div><div class="story-titulo">Respondendo: "Minha equipe não tem motivação"</div><div class="story-txt">"Motivação sem preparo emocional some na segunda de manhã. O que falta não é ânimo — é espaço pra aprender a se relacionar de verdade."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Resposta 2</div><div class="story-titulo">Respondendo: "O clima está muito pesado"</div><div class="story-txt">"Clima pesado é sintoma, não causa. Equipe que não se acolhe entre si não consegue acolher o cliente."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Reconheceu algum desses problemas?</div><div class="story-txt">"Me manda DIAGNÓSTICO no direct. Eu faço um raio-X da sua equipe e te mostro o que trabalhar."</div><div class="story-cta">CTA: DIAGNÓSTICO no direct</div></div></div>
+      </div>
+    </div>
+
+    <!-- S7 -->
+    <div class="seq" id="seq6">
+      <div class="seq-info">
+        <div class="seq-nome">S7 — <em>Por que o treinamento anterior não funcionou</em></div>
+        <div class="seq-desc">Educa e quebra a resistência do gestor que já investiu e não viu resultado.</div>
+      </div>
+      <div class="stories-row">
+        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Gancho</div><div class="story-titulo">Já investiu em treinamento e a equipe voltou igual?</div><div class="story-txt">"Não é culpa da equipe. E provavelmente não é culpa sua. Desliza."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Motivo 1</div><div class="story-titulo">Foi genérico</div><div class="story-txt">"Treinamento que serve pra qualquer empresa não foi feito pra sua empresa. Equipe diferente, cultura diferente, desafio diferente."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Motivo 2</div><div class="story-titulo">Parou na teoria</div><div class="story-txt">"Conteúdo sem vivência não muda atitude. Muda discurso. E discurso o cliente percebe na hora."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">O que funciona</div><div class="story-titulo"><em>Treinamento que funciona começa com diagnóstico</em></div><div class="story-txt">"Eu escuto você, entendo sua equipe e só então desenho o processo. Em média 20h, 2 encontros por semana."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Pronto pra tentar diferente?</div><div class="story-txt">"Me manda EMPRESA no direct e a gente começa do jeito certo."</div><div class="story-cta">CTA: EMPRESA no direct</div></div></div>
+      </div>
+    </div>
+
+    <!-- S8 -->
+    <div class="seq" id="seq7">
+      <div class="seq-info">
+        <div class="seq-nome">S8 — <em>Receptividade no dia a dia</em></div>
+        <div class="seq-desc">Exemplos práticos e simples do que é receptividade. Torna o conceito real.</div>
+      </div>
+      <div class="stories-row">
+        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Gancho</div><div class="story-titulo">Receptividade não é simpatia. Vou te mostrar a diferença.</div><div class="story-txt">"São coisas parecidas mas que produzem resultados completamente diferentes. Desliza."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Exemplo 1</div><div class="story-titulo">Simpático responde. <em>Receptivo escuta antes.</em></div><div class="story-txt">"O funcionário simpático sorri e resolve. O receptivo percebe o estado do cliente antes de abrir a boca."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Exemplo 2</div><div class="story-titulo">Simpático atende. <em>Receptivo acolhe.</em></div><div class="story-txt">"Atender é executar. Acolher é fazer a pessoa se sentir bem-vinda. Só o segundo fideliza."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">A virada</div><div class="story-titulo">Receptividade se treina — não é dom</div><div class="story-txt">"Sua equipe pode aprender isso. Com o processo certo, dentro da realidade da sua empresa."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Quer saber onde sua equipe está nisso?</div><div class="story-txt">"Me manda DIAGNÓSTICO no direct."</div><div class="story-cta">CTA: DIAGNÓSTICO no direct</div></div></div>
+      </div>
+    </div>
+
+    <!-- S9 -->
+    <div class="seq" id="seq8">
+      <div class="seq-info">
+        <div class="seq-nome">S9 — <em>Com quem eu trabalho</em></div>
+        <div class="seq-desc">Posicionamento. Filtra o lead certo e afasta o errado.</div>
+      </div>
+      <div class="stories-row">
+        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Abertura</div><div class="story-titulo">Não trabalho com todo mundo. E vou ser direta sobre isso.</div><div class="story-txt">"Ser clara sobre com quem trabalho respeita o seu tempo e o meu. Desliza."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Sim</div><div class="story-titulo"><em>Trabalho com você se…</em></div><div class="story-txt">"Você tem empresa de médio porte de serviços, valoriza pessoas e quer mudança real de comportamento, não só cumprir tabela."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Não</div><div class="story-titulo">Não trabalho com você se…</div><div class="story-txt">"Você quer palestra pontual, acha que o problema é só a equipe ser preguiçosa ou quer resultado em um encontro."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Por quê</div><div class="story-titulo">Por que sou direta nisso?</div><div class="story-txt">"Resultado de verdade exige processo. Empresa que entra sem essa compreensão não evolui — e isso não serve pra ninguém."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Se você se reconheceu no grupo certo…</div><div class="story-txt">"Me chama no direct. Vamos conversar sobre sua equipe."</div><div class="story-cta">CTA: direct</div></div></div>
+      </div>
+    </div>
+
+    <!-- S10 -->
+    <div class="seq" id="seq9">
+      <div class="seq-info">
+        <div class="seq-nome">S10 — <em>O que muda na prática</em></div>
+        <div class="seq-desc">Mostrar resultados concretos e tangíveis para o gestor. Fecha o ciclo de histórias do mês.</div>
+      </div>
+      <div class="stories-row">
+        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Gancho</div><div class="story-titulo">O gestor sempre me pergunta: o que muda de verdade?</div><div class="story-txt">"Vou te contar o que acontece depois que o processo termina. Desliza."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Resultado 1</div><div class="story-titulo">A equipe para de se defender</div><div class="story-txt">"Em vez de "cliente reclama de tudo", a equipe começa a se perguntar: o que eu posso fazer diferente? Essa virada muda tudo."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Resultado 2</div><div class="story-titulo"><em>O clima muda — e o cliente percebe</em></div><div class="story-txt">"Equipe que se acolhe entre si acolhe o cliente. Clima leve não é sorte. É gestão da receptividade."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Resultado 3</div><div class="story-titulo">O gestor descansa mais</div><div class="story-txt">"Quando a equipe aprende a se relacionar melhor, o gestor para de apagar incêndio o tempo todo. Sobra energia pra pensar no negócio."</div></div></div>
+        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Quer esses resultados?</div><div class="story-txt">"Me manda EMPRESA no direct. A conversa não compromete nada — só abre caminho."</div><div class="story-cta">CTA: EMPRESA no direct</div></div></div>
+      </div>
+    </div>
+
+  </div><!-- /seq-container -->
+</div><!-- /stories-wrap -->
+
+<footer>
+  <p><strong>Simone Welter Bicca</strong> · @simonewelterb · Gestão da Receptividade e Bem-Estar Corporativo</p>
+</footer>
+
+</div><!-- /pg -->
+
+<script>
+function mostraSeq(n) {
+  document.querySelectorAll('.seq').forEach((s,i) => s.classList.toggle('ativo', i===n));
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('ativo', i===n));
+}
+</script>
+</body>
+</html>
