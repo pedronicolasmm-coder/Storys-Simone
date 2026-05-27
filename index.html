@@ -3,605 +3,579 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Simone Welter Bicca — Gestão da Receptividade</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Sequências de Stories — Simone Welter Bicca</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --marrom:#2C1A0E;
-  --marrom-mid:#4A2C1A;
-  --amarelo:#F5A623;
-  --amarelo-clr:#FFF8E7;
-  --amarelo-suave:#FFF3DC;
-  --creme:#FEF6EC;
-  --branco:#FFFFFF;
-  --texto:#1A1A1A;
+  --marrom:#2C1A0E;--marrom-mid:#4A2C1A;--marrom-light:#6B3F22;
+  --amarelo:#F5A623;--amarelo-pale:#FFF8E7;
+  --creme:#FEF6EC;--creme-dark:#F0E0C4;--branco:#FFFFFF;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--creme);color:var(--texto);overflow-x:hidden;}
+body{font-family:'DM Sans',sans-serif;background:var(--creme);color:var(--marrom);overflow-x:hidden;}
 
-/* ── BARRAS LATERAIS ── */
-.barra{position:fixed;top:0;bottom:0;width:26px;background:var(--marrom);z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
+/* BARRAS */
+.barra{position:fixed;top:0;bottom:0;width:20px;background:var(--marrom);z-index:400;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
 .barra.esq{left:0;}.barra.dir{right:0;}
-.bd{width:5px;height:5px;border-radius:50%;background:var(--amarelo);opacity:.55;}
-.bd.ativo{opacity:1;width:7px;height:7px;}
+.bd{width:4px;height:4px;border-radius:50%;background:var(--amarelo);}
+.bd:nth-child(1){animation:pd 3s .0s ease-in-out infinite;}
+.bd:nth-child(2){animation:pd 3s .5s ease-in-out infinite;}
+.bd:nth-child(3){animation:pd 3s 1s ease-in-out infinite;}
+.bd:nth-child(4){animation:pd 3s 1.5s ease-in-out infinite;}
+.bd:nth-child(5){animation:pd 3s 2s ease-in-out infinite;}
+@keyframes pd{0%,100%{opacity:.25;transform:scale(1);}50%{opacity:1;transform:scale(1.6);}}
 
-.pg{margin:0 26px;}
+.pg{margin:0 20px;}
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:26px;right:26px;z-index:200;
-  background:rgba(44,26,14,.96);backdrop-filter:blur(10px);
-  padding:0 48px;height:60px;
-  display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid rgba(245,166,35,.15);
-}
-.nav-logo{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--branco);letter-spacing:.5px;}
-.nav-logo em{font-style:italic;color:var(--amarelo);}
-.nav-links{display:flex;gap:28px;list-style:none;}
-.nav-links a{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;}
-.nav-links a:hover{color:var(--amarelo);}
-.nav-cta{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--amarelo);color:var(--marrom);padding:8px 20px;border-radius:30px;text-decoration:none;transition:transform .2s,box-shadow .2s;}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,166,35,.4);}
+/* BORBOLETA */
+.bfly{position:absolute;pointer-events:none;}
+@keyframes fl1{0%,100%{transform:translateY(0) rotate(-3deg);}30%{transform:translateY(-18px) rotate(3deg);}60%{transform:translateY(-8px) rotate(-5deg);}80%{transform:translateY(-22px) rotate(4deg);}}
+@keyframes fl2{0%,100%{transform:translateY(0) rotate(4deg);}25%{transform:translateY(-14px) rotate(-2deg);}55%{transform:translateY(-24px) rotate(6deg);}75%{transform:translateY(-6px) rotate(-4deg);}}
+@keyframes fl3{0%,100%{transform:translateY(0) rotate(-6deg) scale(1);}40%{transform:translateY(-20px) rotate(4deg) scale(1.05);}70%{transform:translateY(-10px) rotate(-3deg) scale(.97);}}
 
-/* ── HERO ── */
-.hero{
-  min-height:100vh;background:var(--marrom);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:100px 48px 80px;
-  position:relative;overflow:hidden;
-}
-.hero-mandala{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;opacity:.05;animation:spin 100s linear infinite;}
+/* MANDALA */
 @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg);}}
+@keyframes spinr{to{transform:translate(-50%,-50%) rotate(-360deg);}}
+@keyframes spinf{to{transform:rotate(360deg);}}
+@keyframes spinrf{to{transform:rotate(-360deg);}}
 
-.bfly{position:absolute;animation:flutter 7s ease-in-out infinite;opacity:.16;}
-@keyframes flutter{0%,100%{transform:translateY(0) rotate(-5deg);}50%{transform:translateY(-16px) rotate(5deg);}}
+/* HERO */
+.hero{background:var(--marrom);padding:100px 60px 80px;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:96vh;justify-content:center;}
+.hero-m1{position:absolute;top:50%;left:50%;width:780px;height:780px;opacity:.04;animation:spin 120s linear infinite;}
+.hero-m2{position:absolute;top:50%;left:50%;width:500px;height:500px;opacity:.055;animation:spinr 70s linear infinite;}
+.hero-m3{position:absolute;top:50%;left:50%;width:300px;height:300px;opacity:.07;animation:spin 45s linear infinite;}
 
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.3);
-  color:var(--amarelo);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  padding:7px 18px;border-radius:30px;margin-bottom:32px;
-  position:relative;z-index:1;
-  animation:fadeUp .8s ease both;
-}
-.hero-badge span{width:6px;height:6px;border-radius:50%;background:var(--amarelo);animation:pulse 2s ease-in-out infinite;}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.7);}}
-
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(44px,7vw,96px);font-weight:900;
-  color:var(--branco);line-height:.95;margin-bottom:20px;
-  position:relative;z-index:1;
-  animation:fadeUp .9s ease .1s both;
-}
+.hero-tag{display:inline-block;background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.3);color:var(--amarelo);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:7px 20px;border-radius:30px;margin-bottom:28px;position:relative;z-index:2;animation:fiu .8s ease both;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(38px,6.5vw,88px);font-weight:900;color:#fff;line-height:.95;margin-bottom:16px;position:relative;z-index:2;animation:fiu .8s .15s ease both;}
 .hero h1 em{font-style:italic;color:var(--amarelo);}
-.hero h1 .linha2{display:block;font-size:clamp(28px,4vw,56px);color:rgba(255,255,255,.55);font-weight:400;margin-top:8px;}
+.hero-sub{font-size:clamp(14px,1.6vw,18px);color:rgba(255,255,255,.55);max-width:540px;line-height:1.8;margin-bottom:52px;position:relative;z-index:2;animation:fiu .8s .3s ease both;}
+.hero-scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,rgba(245,166,35,.7),transparent);margin:0 auto;animation:grow 2.2s ease-in-out infinite;}
+@keyframes grow{0%,100%{opacity:.5;transform:scaleY(1);}50%{opacity:1;transform:scaleY(1.25);}}
+@keyframes fiu{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 
-.hero-sub{
-  font-size:clamp(15px,1.8vw,19px);color:rgba(255,255,255,.62);
-  max-width:560px;line-height:1.7;margin-bottom:48px;
-  position:relative;z-index:1;
-  animation:fadeUp 1s ease .2s both;
-}
+.hero-nums{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;position:relative;z-index:2;animation:fiu .8s .45s ease both;}
+.hero-num-box{text-align:center;}
+.hero-num-box .n{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--amarelo);line-height:1;}
+.hero-num-box .l{font-size:11px;font-weight:600;letter-spacing:1px;color:rgba(255,255,255,.4);margin-top:4px;text-transform:uppercase;}
 
-.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;animation:fadeUp 1s ease .3s both;}
-.btn-pri{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--amarelo);color:var(--marrom);
-  font-size:14px;font-weight:700;padding:15px 32px;border-radius:50px;
-  text-decoration:none;transition:transform .2s,box-shadow .2s;
-  box-shadow:0 8px 30px rgba(245,166,35,.4);
-}
-.btn-pri:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(245,166,35,.55);}
-.btn-sec{
-  display:inline-flex;align-items:center;gap:8px;
-  background:transparent;color:rgba(255,255,255,.7);
-  font-size:14px;font-weight:600;padding:15px 32px;border-radius:50px;
-  text-decoration:none;border:1px solid rgba(255,255,255,.2);
-  transition:border-color .2s,color .2s;
-}
-.btn-sec:hover{border-color:var(--amarelo);color:var(--amarelo);}
+/* INTRODUÇÃO */
+.intro{background:var(--creme);padding:90px 60px;position:relative;overflow:hidden;}
+.intro-inner{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+.sec-label{display:block;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--amarelo);margin-bottom:12px;}
+.sec-h2{font-family:'Playfair Display',serif;font-size:clamp(24px,3.2vw,44px);font-weight:700;color:var(--marrom);line-height:1.15;margin-bottom:18px;}
+.sec-h2 em{font-style:italic;color:var(--amarelo);}
+.intro p{font-size:15px;color:var(--marrom-light);line-height:1.85;margin-bottom:16px;}
+.intro-visual{display:flex;flex-direction:column;gap:14px;}
+.intro-pill{background:var(--marrom);border-radius:14px;padding:18px 22px;display:flex;align-items:center;gap:14px;transition:transform .2s;}
+.intro-pill:hover{transform:translateX(6px);}
+.intro-pill-ico{font-size:22px;flex-shrink:0;}
+.intro-pill-txt{font-size:13px;color:rgba(255,255,255,.7);font-weight:500;line-height:1.5;}
+.intro-pill-txt strong{color:var(--amarelo);display:block;font-size:12px;letter-spacing:.5px;margin-bottom:2px;}
 
-.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.3);font-size:10px;letter-spacing:2px;text-transform:uppercase;animation:fadeUp 1.2s ease .6s both;}
-.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,transparent,var(--amarelo));animation:scrollPulse 2s ease-in-out infinite;}
-@keyframes scrollPulse{0%,100%{opacity:.3;}50%{opacity:1;}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+/* SEQUÊNCIAS */
+.seqs{background:var(--marrom);padding:90px 60px;position:relative;overflow:hidden;}
+.seqs-header{max-width:1060px;margin:0 auto 60px;text-align:center;position:relative;z-index:2;}
+.seqs-label{display:block;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(245,166,35,.6);margin-bottom:12px;}
+.seqs-h2{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,52px);font-weight:900;color:#fff;line-height:1.1;}
+.seqs-h2 em{font-style:italic;color:var(--amarelo);}
+.seqs-sub{font-size:16px;color:rgba(255,255,255,.45);max-width:520px;margin:16px auto 0;line-height:1.75;}
 
-/* ── NÚMEROS ── */
-.sec-nums{background:var(--amarelo);padding:52px 48px;}
-.nums-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
-.num-item{text-align:center;padding:0 24px;border-right:1px solid rgba(44,26,14,.15);}
-.num-item:last-child{border-right:none;}
-.num-big{font-family:'Playfair Display',serif;font-size:clamp(40px,6vw,72px);font-weight:900;color:var(--marrom);line-height:1;}
-.num-label{font-size:13px;font-weight:600;color:rgba(44,26,14,.65);margin-top:6px;line-height:1.4;}
+.seqs-grid{max-width:1060px;margin:0 auto;display:flex;flex-direction:column;gap:48px;position:relative;z-index:2;}
 
-/* ── SEÇÃO GENÉRICA ── */
-.sec{padding:90px 48px;max-width:1100px;margin:0 auto;}
-.sec-label{display:block;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--amarelo);margin-bottom:12px;}
-.sec-titulo{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,48px);font-weight:700;color:var(--marrom);line-height:1.15;margin-bottom:40px;}
-.sec-titulo em{font-style:italic;color:var(--amarelo);}
+/* CARD SEQUÊNCIA */
+.seq-card{background:rgba(255,255,255,.04);border:1px solid rgba(245,166,35,.14);border-radius:24px;overflow:hidden;transition:border-color .3s;}
+.seq-card:hover{border-color:rgba(245,166,35,.3);}
 
-/* ── SINAIS ── */
-.sinais-wrap{background:var(--branco);}
-.sinais-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
-.sinal-card{
-  background:var(--creme);border-radius:18px;padding:28px 26px;
-  border-top:4px solid var(--amarelo);
-  transition:transform .25s,box-shadow .25s;
-}
-.sinal-card:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(44,26,14,.1);}
-.sinal-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:rgba(245,166,35,.25);line-height:1;margin-bottom:10px;}
-.sinal-titulo{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--marrom);margin-bottom:10px;}
-.sinal-titulo em{font-style:italic;color:var(--amarelo);}
-.sinal-txt{font-size:14px;color:#666;line-height:1.7;}
-
-/* ── MÉTODO ── */
-.metodo-wrap{background:var(--marrom);}
-.metodo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;}
-.metodo-step{
-  background:rgba(255,255,255,.04);padding:40px 32px;
-  border-right:1px solid rgba(245,166,35,.1);
-  transition:background .2s;
-}
-.metodo-step:last-child{border-right:none;}
-.metodo-step:hover{background:rgba(245,166,35,.06);}
-.step-n{font-family:'Playfair Display',serif;font-size:64px;font-weight:900;color:rgba(245,166,35,.15);line-height:1;margin-bottom:16px;}
-.step-titulo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--branco);margin-bottom:12px;}
-.step-titulo em{font-style:italic;color:var(--amarelo);}
-.step-txt{font-size:14px;color:rgba(255,255,255,.6);line-height:1.7;}
-.step-badge{display:inline-block;margin-top:14px;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);color:var(--amarelo);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;}
-
-/* ── DIFERENÇA ── */
-.diff-wrap{background:var(--creme);}
-.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.diff-card{border-radius:20px;padding:36px 32px;}
-.diff-card.ruim{background:rgba(44,26,14,.06);border:1px solid rgba(44,26,14,.1);}
-.diff-card.bom{background:var(--marrom);color:var(--branco);}
-.diff-tipo{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
-.diff-card.ruim .diff-tipo{color:#999;}
-.diff-card.bom .diff-tipo{color:var(--amarelo);}
-.diff-titulo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:16px;line-height:1.2;}
-.diff-card.ruim .diff-titulo{color:var(--marrom);}
-.diff-card.bom .diff-titulo{color:var(--branco);}
-.diff-card.bom .diff-titulo em{font-style:italic;color:var(--amarelo);}
-.diff-lista{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.diff-lista li{font-size:14px;line-height:1.6;display:flex;gap:10px;align-items:flex-start;}
-.diff-card.ruim .diff-lista li{color:#666;}
-.diff-card.bom .diff-lista li{color:rgba(255,255,255,.78);}
-.diff-lista li::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px;}
-.diff-card.ruim .diff-lista li::before{background:#ccc;}
-.diff-card.bom .diff-lista li::before{background:var(--amarelo);}
-
-/* ── CTA FINAL ── */
-.cta-final{
-  background:var(--amarelo);padding:100px 48px;
-  text-align:center;position:relative;overflow:hidden;
-}
-.cta-mandala{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;opacity:.07;animation:spin 120s linear infinite;}
-.cta-inner{max-width:640px;margin:0 auto;position:relative;z-index:1;}
-.cta-inner h2{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,60px);font-weight:900;color:var(--marrom);line-height:1.05;margin-bottom:20px;}
-.cta-inner h2 em{font-style:italic;}
-.cta-inner p{font-size:16px;color:rgba(44,26,14,.7);margin-bottom:40px;line-height:1.7;}
-.cta-palavra{display:inline-block;background:rgba(44,26,14,.1);border:1.5px solid rgba(44,26,14,.2);color:var(--marrom);font-size:13px;font-weight:700;letter-spacing:2px;padding:8px 20px;border-radius:30px;margin-bottom:28px;}
-.btn-escuro{display:inline-flex;align-items:center;gap:10px;background:var(--marrom);color:var(--amarelo);font-size:15px;font-weight:700;padding:17px 40px;border-radius:50px;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 30px rgba(44,26,14,.3);}
-.btn-escuro:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(44,26,14,.45);}
-
-/* ══════════════════════════════
-   STORIES
-══════════════════════════════ */
-.stories-wrap{background:var(--marrom);padding:90px 0;}
-.stories-header{padding:0 48px 48px;max-width:1100px;margin:0 auto;}
-.stories-header .sec-label{color:rgba(255,255,255,.45);}
-.stories-header .sec-titulo{color:var(--branco);margin-bottom:0;}
-
-/* tabs */
-.stories-tabs{display:flex;gap:10px;padding:0 48px;margin-bottom:36px;flex-wrap:wrap;max-width:1100px;margin-left:auto;margin-right:auto;}
-.tab{
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  padding:8px 18px;border-radius:30px;cursor:pointer;border:none;
-  background:rgba(255,255,255,.07);color:rgba(255,255,255,.45);
-  transition:background .2s,color .2s;
-}
-.tab.ativo,.tab:hover{background:var(--amarelo);color:var(--marrom);}
-
-/* sequência */
-.seq-container{padding:0 48px;max-width:1100px;margin:0 auto;}
-.seq{display:none;}
-.seq.ativo{display:block;}
-
-.seq-info{margin-bottom:28px;}
-.seq-nome{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--branco);margin-bottom:6px;}
+.seq-head{background:rgba(245,166,35,.08);padding:20px 28px;display:flex;align-items:center;gap:16px;border-bottom:1px solid rgba(245,166,35,.1);}
+.seq-n{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;font-style:italic;color:var(--amarelo);background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.25);padding:4px 14px;border-radius:20px;white-space:nowrap;}
+.seq-nome{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;flex:1;line-height:1.2;}
 .seq-nome em{font-style:italic;color:var(--amarelo);}
-.seq-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;}
-.seq-badge-caixinha{display:inline-flex;align-items:center;gap:6px;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);color:var(--amarelo);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-top:8px;}
+.seq-obj{font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.35);white-space:nowrap;}
+.seq-cta-badge{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--amarelo);color:var(--marrom);padding:4px 12px;border-radius:20px;white-space:nowrap;}
 
-/* cards de story */
-.stories-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
-.story-card{
-  background:rgba(255,255,255,.05);border:1px solid rgba(245,166,35,.15);
-  border-radius:16px;overflow:hidden;
-  display:flex;flex-direction:column;
-  transition:background .2s,transform .2s;
-}
-.story-card:hover{background:rgba(245,166,35,.07);transform:translateY(-4px);}
-.story-num{
-  background:var(--amarelo);color:var(--marrom);
-  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  padding:6px 12px;
-}
-.story-body{padding:16px 14px;flex:1;display:flex;flex-direction:column;gap:8px;}
-.story-tipo{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);}
-.story-titulo{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:var(--branco);line-height:1.3;}
-.story-titulo em{font-style:italic;color:var(--amarelo);}
-.story-txt{font-size:11px;color:rgba(255,255,255,.55);line-height:1.55;flex:1;}
-.story-cta{margin-top:8px;font-size:10px;font-weight:700;color:var(--amarelo);letter-spacing:.5px;}
-.story-caixinha{
-  background:rgba(245,166,35,.1);border:1px dashed rgba(245,166,35,.4);
-  border-radius:8px;padding:8px 10px;margin-top:6px;
-  font-size:10px;color:var(--amarelo);line-height:1.5;
-  display:flex;align-items:flex-start;gap:6px;
-}
-.story-caixinha::before{content:'❓';font-size:12px;flex-shrink:0;}
+.seq-body{padding:28px 28px 32px;}
+.seq-objetivo{font-size:12px;color:rgba(255,255,255,.35);font-style:italic;margin-bottom:24px;padding-left:14px;border-left:2px solid rgba(245,166,35,.25);}
 
-/* ── FOOTER ── */
-footer{background:var(--marrom);padding:36px 48px;text-align:center;border-top:1px solid rgba(245,166,35,.1);}
-footer p{color:rgba(255,255,255,.35);font-size:13px;}
-footer strong{color:var(--amarelo);}
+/* STORIES DENTRO DO CARD */
+.stories-row{display:flex;gap:12px;align-items:flex-start;overflow-x:auto;padding-bottom:4px;}
+.story-frame{background:rgba(255,255,255,.06);border:1px solid rgba(245,166,35,.12);border-radius:16px;min-width:160px;max-width:160px;padding:18px 14px 16px;flex-shrink:0;display:flex;flex-direction:column;gap:10px;transition:background .25s,border-color .25s,transform .25s;cursor:default;}
+.story-frame:hover{background:rgba(245,166,35,.08);border-color:rgba(245,166,35,.3);transform:translateY(-4px);}
 
-/* responsivo */
-@media(max-width:900px){
-  .stories-row{grid-template-columns:repeat(3,1fr);}
-  .diff-grid{grid-template-columns:1fr;}
-  .nums-inner{grid-template-columns:1fr;gap:28px;}
-  .num-item{border-right:none;border-bottom:1px solid rgba(44,26,14,.15);padding-bottom:24px;}
-  .num-item:last-child{border-bottom:none;}
+.sf-num{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,166,35,.55);}
+.sf-tipo{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:rgba(245,166,35,.1);color:rgba(245,166,35,.8);border-radius:6px;padding:2px 8px;width:fit-content;}
+.sf-titulo{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#fff;line-height:1.3;}
+.sf-titulo em{font-style:italic;color:var(--amarelo);}
+.sf-desc{font-size:11px;color:rgba(255,255,255,.55);line-height:1.6;flex:1;}
+.sf-cta{margin-top:auto;display:inline-block;background:var(--amarelo);color:var(--marrom);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;border-radius:10px;}
+.sf-cta.outline{background:transparent;border:1px solid rgba(245,166,35,.4);color:var(--amarelo);}
+
+/* SETA ENTRE STORIES */
+.s-arrow{display:flex;align-items:center;flex-shrink:0;padding-top:40px;}
+.s-arrow svg{opacity:.25;}
+
+/* SEÇÃO COPY DETALHADO */
+.copy-sec{background:var(--creme);padding:90px 60px;position:relative;overflow:hidden;}
+.copy-inner{max-width:1060px;margin:0 auto;}
+.copy-header{margin-bottom:60px;}
+.copy-header .sec-h2{margin-bottom:8px;}
+.copy-header p{font-size:15px;color:var(--marrom-light);line-height:1.8;}
+
+.copy-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.copy-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(44,26,14,.08);transition:transform .25s,box-shadow .25s;}
+.copy-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(44,26,14,.15);}
+.copy-card-head{background:var(--marrom);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;}
+.copy-card-head .cn{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.copy-card-head .ct{font-size:10px;font-weight:700;letter-spacing:1px;background:var(--amarelo);color:var(--marrom);padding:3px 10px;border-radius:14px;}
+.copy-card-body{padding:22px 22px 18px;}
+.copy-card-titulo{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--marrom);margin-bottom:14px;line-height:1.25;}
+.copy-card-titulo em{font-style:italic;color:var(--amarelo);}
+.copy-items{display:flex;flex-direction:column;gap:10px;}
+.ci{display:flex;gap:10px;align-items:flex-start;}
+.ci-num{width:20px;height:20px;border-radius:50%;background:var(--marrom);color:var(--amarelo);font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.ci-txt{font-size:12px;color:#555;line-height:1.6;}
+.ci-txt strong{color:var(--marrom);font-weight:700;}
+.ci.cta-item{background:var(--marrom);border-radius:8px;padding:10px 12px;margin-top:4px;}
+.ci.cta-item .ci-num{background:var(--amarelo);color:var(--marrom);}
+.ci.cta-item .ci-txt{color:rgba(255,255,255,.85);}
+.ci.cta-item .ci-txt strong{color:var(--amarelo);}
+.copy-card-foot{padding:12px 20px;background:var(--amarelo-pale);border-top:1px solid rgba(0,0,0,.05);display:flex;align-items:center;justify-content:space-between;}
+.copy-card-foot-txt{font-size:11px;color:#999;font-style:italic;}
+.copy-card-cta{font-size:10px;font-weight:700;background:var(--marrom);color:var(--amarelo);padding:4px 12px;border-radius:14px;}
+
+/* DICA ESTRATÉGICA */
+.dica{background:var(--marrom-mid);padding:72px 60px;position:relative;overflow:hidden;}
+.dica-inner{max-width:1060px;margin:0 auto;}
+.dica-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;}
+.dica-card{background:rgba(255,255,255,.05);border:1px solid rgba(245,166,35,.12);border-radius:18px;padding:28px 24px;transition:background .3s,transform .3s;}
+.dica-card:hover{background:rgba(245,166,35,.07);transform:translateY(-4px);}
+.dica-ico{font-size:26px;margin-bottom:14px;}
+.dica-titulo{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.2;}
+.dica-titulo em{font-style:italic;color:var(--amarelo);}
+.dica-txt{font-size:13px;color:rgba(255,255,255,.5);line-height:1.75;}
+
+/* CTA FINAL */
+.cta-fim{background:var(--marrom);padding:100px 60px;position:relative;overflow:hidden;text-align:center;}
+.cta-fim-inner{max-width:700px;margin:0 auto;position:relative;z-index:2;}
+.cta-fim h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,58px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:20px;}
+.cta-fim h2 em{font-style:italic;color:var(--amarelo);}
+.cta-fim p{font-size:16px;color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:44px;}
+.cta-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.btn-y{display:inline-block;background:var(--amarelo);color:var(--marrom);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 32px;border-radius:30px;text-decoration:none;transition:transform .2s,box-shadow .2s;}
+.btn-y:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(245,166,35,.4);}
+.btn-o{display:inline-block;background:transparent;border:1.5px solid rgba(245,166,35,.4);color:var(--amarelo);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 32px;border-radius:30px;text-decoration:none;transition:background .2s,border-color .2s;}
+.btn-o:hover{background:rgba(245,166,35,.08);border-color:rgba(245,166,35,.7);}
+
+/* FOOTER */
+footer{background:var(--marrom-mid);padding:28px 60px;display:flex;align-items:center;justify-content:space-between;}
+.foot-logo{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff;}
+.foot-logo em{font-style:italic;color:var(--amarelo);}
+.foot-txt{font-size:11px;color:rgba(255,255,255,.3);}
+.foot-ig{font-size:11px;font-weight:600;color:rgba(245,166,35,.65);text-decoration:none;transition:color .2s;}
+.foot-ig:hover{color:var(--amarelo);}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .intro-inner,.copy-grid{grid-template-columns:1fr;}
+  .dica-grid{grid-template-columns:1fr 1fr;}
+  .seq-head{flex-wrap:wrap;gap:10px;}
+  .seq-obj{display:none;}
+  .hero,.intro,.seqs,.copy-sec,.dica,.cta-fim{padding-left:28px;padding-right:28px;}
+  footer{flex-direction:column;gap:10px;text-align:center;padding:24px 28px;}
 }
-@media(max-width:680px){
-  .barra{width:14px;}.pg{margin:0 14px;}
-  nav{left:14px;right:14px;padding:0 20px;}
-  .nav-links{display:none;}
-  .stories-row{grid-template-columns:repeat(2,1fr);}
-  .stories-tabs,.seq-container,.stories-header{padding-left:20px;padding-right:20px;}
-  .sec{padding:60px 20px;}
-  .metodo-grid{grid-template-columns:1fr;}
-  .cta-final{padding:70px 20px;}
+@media(max-width:560px){
+  .dica-grid{grid-template-columns:1fr;}
+  .story-frame{min-width:140px;max-width:140px;}
 }
 </style>
 </head>
 <body>
 
-<div class="barra esq"><div class="bd ativo"></div><div class="bd"></div><div class="bd"></div><div class="bd"></div><div class="bd"></div></div>
-<div class="barra dir"><div class="bd ativo"></div><div class="bd"></div><div class="bd"></div><div class="bd"></div><div class="bd"></div></div>
+<div class="barra esq"><div class="bd"></div><div class="bd"></div><div class="bd"></div><div class="bd"></div><div class="bd"></div></div>
+<div class="barra dir"><div class="bd"></div><div class="bd"></div><div class="bd"></div><div class="bd"></div><div class="bd"></div></div>
 
 <div class="pg">
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">Simone <em>Welter</em></div>
-  <ul class="nav-links">
-    <li><a href="#sinais">Sinais</a></li>
-    <li><a href="#metodo">Método</a></li>
-    <li><a href="#diferenca">Diferença</a></li>
-    <li><a href="#stories">Stories</a></li>
-  </ul>
-  <a href="https://wa.me/5555999660224?text=EMPRESA" class="nav-cta" target="_blank">Falar no direct</a>
-</nav>
-
-<!-- HERO -->
+<!-- ══ HERO ══ -->
 <section class="hero">
-  <svg class="hero-mandala" viewBox="0 0 400 400" fill="none"><g stroke="#F5A623" stroke-width=".6"><circle cx="200" cy="200" r="190"/><circle cx="200" cy="200" r="158"/><circle cx="200" cy="200" r="126"/><circle cx="200" cy="200" r="94"/><circle cx="200" cy="200" r="62"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(0 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(30 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(60 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(90 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(120 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(150 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(180 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(210 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(240 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(270 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(300 200 200)"/><ellipse cx="200" cy="62" rx="16" ry="56" transform="rotate(330 200 200)"/></g></svg>
 
-  <svg class="bfly" style="top:15%;left:6%;width:58px;" viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".7"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".45"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".3"/></svg>
-  <svg class="bfly" style="bottom:22%;right:7%;width:42px;animation-delay:3s;" viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".7"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".45"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".3"/></svg>
-  <svg class="bfly" style="top:60%;left:12%;width:32px;animation-delay:1.5s;" viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".7"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".45"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".3"/></svg>
+  <!-- Mandalas -->
+  <svg class="hero-m1" viewBox="0 0 500 500" fill="none"><g stroke="#F5A623" stroke-width=".5"><circle cx="250" cy="250" r="240"/><circle cx="250" cy="250" r="195"/><circle cx="250" cy="250" r="150"/><circle cx="250" cy="250" r="105"/><circle cx="250" cy="250" r="60"/><ellipse cx="250" cy="72" rx="18" ry="62" transform="rotate(0 250 250)"/><ellipse cx="250" cy="72" rx="18" ry="62" transform="rotate(30 250 250)"/><ellipse cx="250" cy="72" rx="18" ry="62" transform="rotate(60 250 250)"/><ellipse cx="250" cy="72" rx="18" ry="62" transform="rotate(90 250 250)"/><ellipse cx="250" cy="72" rx="18" ry="62" transform="rotate(120 250 250)"/><ellipse cx="250" cy="72" rx="18" ry="62" transform="rotate(150 250 250)"/><ellipse cx="250" cy="72" rx="18" ry="62" transform="rotate(180 250 250)"/><ellipse cx="250" cy="72" rx="18" ry="62" transform="rotate(210 250 250)"/><ellipse cx="250" cy="72" rx="18" ry="62" transform="rotate(240 250 250)"/><ellipse cx="250" cy="72" rx="18" ry="62" transform="rotate(270 250 250)"/><ellipse cx="250" cy="72" rx="18" ry="62" transform="rotate(300 250 250)"/><ellipse cx="250" cy="72" rx="18" ry="62" transform="rotate(330 250 250)"/><line x1="250" y1="10" x2="250" y2="490" stroke-width=".3"/><line x1="10" y1="250" x2="490" y2="250" stroke-width=".3"/><line x1="77" y1="77" x2="423" y2="423" stroke-width=".3"/><line x1="423" y1="77" x2="77" y2="423" stroke-width=".3"/></g></svg>
 
-  <div class="hero-badge"><span></span>@simonewelterb · Gestão da Receptividade</div>
-  <h1>Sua equipe atende.<br><em>Mas acolhe?</em><span class="linha2">Diagnóstico + treinamento que muda atitude de verdade.</span></h1>
-  <p class="hero-sub">Não é palestra solta. É um processo desenhado pra realidade da sua empresa — comportamento, emocional e receptividade na prática.</p>
-  <div class="hero-btns">
-    <a href="https://wa.me/5555999660224?text=EMPRESA" class="btn-pri" target="_blank">🦋 Me manda EMPRESA no direct</a>
-    <a href="#sinais" class="btn-sec">Ver os sinais →</a>
+  <svg class="hero-m2" viewBox="0 0 400 400" fill="none"><g stroke="#F5A623" stroke-width=".55"><circle cx="200" cy="200" r="190"/><circle cx="200" cy="200" r="145"/><circle cx="200" cy="200" r="100"/><ellipse cx="200" cy="65" rx="14" ry="52" transform="rotate(0 200 200)"/><ellipse cx="200" cy="65" rx="14" ry="52" transform="rotate(45 200 200)"/><ellipse cx="200" cy="65" rx="14" ry="52" transform="rotate(90 200 200)"/><ellipse cx="200" cy="65" rx="14" ry="52" transform="rotate(135 200 200)"/><ellipse cx="200" cy="65" rx="14" ry="52" transform="rotate(180 200 200)"/><ellipse cx="200" cy="65" rx="14" ry="52" transform="rotate(225 200 200)"/><ellipse cx="200" cy="65" rx="14" ry="52" transform="rotate(270 200 200)"/><ellipse cx="200" cy="65" rx="14" ry="52" transform="rotate(315 200 200)"/></g></svg>
+
+  <svg class="hero-m3" viewBox="0 0 300 300" fill="none"><g stroke="#F5A623" stroke-width=".6"><circle cx="150" cy="150" r="140"/><circle cx="150" cy="150" r="105"/><circle cx="150" cy="150" r="70"/><ellipse cx="150" cy="48" rx="12" ry="42" transform="rotate(0 150 150)"/><ellipse cx="150" cy="48" rx="12" ry="42" transform="rotate(60 150 150)"/><ellipse cx="150" cy="48" rx="12" ry="42" transform="rotate(120 150 150)"/><ellipse cx="150" cy="48" rx="12" ry="42" transform="rotate(180 150 150)"/><ellipse cx="150" cy="48" rx="12" ry="42" transform="rotate(240 150 150)"/><ellipse cx="150" cy="48" rx="12" ry="42" transform="rotate(300 150 150)"/></g></svg>
+
+  <!-- Borboletas hero -->
+  <div class="bfly" style="top:14%;left:5%;width:68px;animation:fl1 4.5s ease-in-out infinite;">
+    <svg viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623" opacity=".95"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".7"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".42"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".25"/><circle cx="40" cy="30" r="2.2" fill="#F5A623"/></svg>
   </div>
-  <div class="hero-scroll"><div class="scroll-line"></div><span>rolar</span></div>
+  <div class="bfly" style="bottom:18%;right:6%;width:52px;animation:fl2 5.5s ease-in-out infinite;animation-delay:.9s;">
+    <svg viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623" opacity=".7"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".5"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".28"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".16"/><circle cx="40" cy="30" r="1.8" fill="#F5A623" opacity=".7"/></svg>
+  </div>
+  <div class="bfly" style="top:28%;right:12%;width:36px;animation:fl3 7s ease-in-out infinite;animation-delay:2.2s;opacity:.55;">
+    <svg viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".7"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".4"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".22"/></svg>
+  </div>
+  <div class="bfly" style="bottom:30%;left:14%;width:30px;animation:fl1 9s ease-in-out infinite;animation-delay:3.5s;opacity:.4;">
+    <svg viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".65"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".35"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".18"/></svg>
+  </div>
+
+  <span class="hero-tag">@simonewelterb · Plano de Stories</span>
+  <h1>10 sequências de<br><em>stories</em> que convertem</h1>
+  <p class="hero-sub">Roteiros completos para você executar semana a semana — do gancho ao CTA.</p>
+
+  <div class="hero-nums">
+    <div class="hero-num-box"><div class="n">10</div><div class="l">Sequências</div></div>
+    <div class="hero-num-box"><div class="n">3–5</div><div class="l">Stories por seq.</div></div>
+    <div class="hero-num-box"><div class="n">3</div><div class="l">CTAs diferentes</div></div>
+  </div>
+
+  <div class="hero-scroll-line"></div>
 </section>
 
-<!-- NÚMEROS -->
-<div class="sec-nums">
-  <div class="nums-inner">
-    <div class="num-item"><div class="num-big">20h</div><div class="num-label">média de treinamento<br>por empresa</div></div>
-    <div class="num-item"><div class="num-big">2x</div><div class="num-label">encontros por semana<br>na rotina da equipe</div></div>
-    <div class="num-item"><div class="num-big">100%</div><div class="num-label">personalizado<br>pra sua realidade</div></div>
+<!-- ══ INTRODUÇÃO ══ -->
+<section class="intro">
+  <!-- Mandala decorativa -->
+  <div style="position:absolute;top:-60px;right:-60px;width:340px;height:340px;opacity:.06;pointer-events:none;">
+    <svg viewBox="0 0 400 400" fill="none" style="width:100%;height:100%;animation:spinf 80s linear infinite;"><g stroke="#F5A623" stroke-width=".7"><circle cx="200" cy="200" r="190"/><circle cx="200" cy="200" r="150"/><circle cx="200" cy="200" r="110"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(0 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(40 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(80 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(120 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(160 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(200 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(240 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(280 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(320 200 200)"/></g></svg>
   </div>
-</div>
-
-<!-- SINAIS -->
-<div class="sinais-wrap" id="sinais">
-  <div class="sec">
-    <span class="sec-label">Os sinais</span>
-    <h2 class="sec-titulo">3 sinais que a maioria dos gestores ignora<br><em>até o cliente ir embora</em></h2>
-    <div class="sinais-grid">
-      <div class="sinal-card">
-        <div class="sinal-num">01</div>
-        <div class="sinal-titulo">Sua equipe atende,<br><em>mas não acolhe</em></div>
-        <div class="sinal-txt">Resolver o problema do cliente é o mínimo. O que fideliza é fazer ele se sentir visto, ouvido e bem-vindo. Isso é receptividade.</div>
-      </div>
-      <div class="sinal-card">
-        <div class="sinal-num">02</div>
-        <div class="sinal-titulo">O clima interno<br><em>está pesado</em></div>
-        <div class="sinal-txt">Equipe que não se acolhe entre si não consegue acolher o cliente. Clima organizacional e atendimento estão diretamente ligados.</div>
-      </div>
-      <div class="sinal-card">
-        <div class="sinal-num">03</div>
-        <div class="sinal-titulo">Os treinamentos anteriores<br><em>não mudaram nada</em></div>
-        <div class="sinal-txt">Se o comportamento não mudou, o modelo estava errado. Não a sua equipe. Treinamento genérico não resolve problema real.</div>
-      </div>
+  <div class="intro-inner">
+    <div class="reveal">
+      <span class="sec-label">Como usar</span>
+      <h2 class="sec-h2">Cada sequência tem um <em>objetivo claro</em></h2>
+      <p>As 10 sequências cobrem os principais momentos da jornada do gestor — da dor até a decisão de mandar no direct.</p>
+      <p>Cada story tem tipo, texto sugerido e CTA. Use na ordem ou escolha por prioridade de semana.</p>
+    </div>
+    <div class="intro-visual reveal">
+      <div class="intro-pill"><div class="intro-pill-ico">🎯</div><div class="intro-pill-txt"><strong>Objetivo estratégico</strong>Todo story tem uma função — gancho, virada, prova ou CTA.</div></div>
+      <div class="intro-pill"><div class="intro-pill-ico">🦋</div><div class="intro-pill-txt"><strong>3 CTAs usados</strong>DIAGNÓSTICO, EMPRESA e NR1 — cada sequência direciona o lead certo.</div></div>
+      <div class="intro-pill"><div class="intro-pill-ico">◎</div><div class="intro-pill-txt"><strong>Pronto para executar</strong>Texto sugerido para cada story, sem precisar criar do zero.</div></div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- MÉTODO -->
-<div class="metodo-wrap" id="metodo">
-  <div class="sec">
-    <span class="sec-label" style="color:rgba(255,255,255,.45);">O método</span>
-    <h2 class="sec-titulo" style="color:var(--branco);">O que eu faço quando entro<br><em>na sua empresa</em></h2>
-  </div>
-  <div class="metodo-grid">
-    <div class="metodo-step">
-      <div class="step-n">1</div>
-      <div class="step-titulo">Primeiro eu<br><em>escuto você</em></div>
-      <div class="step-txt">Entendo seus desafios com equipe, atendimento, clima e liderança. Começo pela realidade da empresa. Nada de pacote pronto.</div>
-    </div>
-    <div class="metodo-step">
-      <div class="step-n">2</div>
-      <div class="step-titulo">Depois faço um<br><em>diagnóstico</em></div>
-      <div class="step-txt">Observo o dia a dia, converso com a equipe, entrego um raio-X claro dos pontos fortes e dos pontos críticos.</div>
-    </div>
-    <div class="metodo-step">
-      <div class="step-n">3</div>
-      <div class="step-titulo">Treinamento<br><em>na medida certa</em></div>
-      <div class="step-txt">Com o diagnóstico em mãos, monto um processo só pra sua empresa. Comportamento, emocional e receptividade na prática.</div>
-      <span class="step-badge">Média 20h · 2x por semana</span>
-    </div>
-    <div class="metodo-step">
-      <div class="step-n">✓</div>
-      <div class="step-titulo">Resultado que<br><em>fica de verdade</em></div>
-      <div class="step-txt">A equipe começa a mudar postura durante o processo, não só depois que acaba. Mudança que aparece na segunda de manhã.</div>
-    </div>
-  </div>
-</div>
+<!-- ══ SEQUÊNCIAS ══ -->
+<section class="seqs">
 
-<!-- DIFERENÇA -->
-<div class="diff-wrap" id="diferenca">
-  <div class="sec">
-    <span class="sec-label">A diferença</span>
-    <h2 class="sec-titulo">Atendimento bom e atendimento<br><em>receptivo não são a mesma coisa</em></h2>
-    <div class="diff-grid">
-      <div class="diff-card ruim">
-        <div class="diff-tipo">Atendimento comum</div>
-        <div class="diff-titulo">Resolve. Responde rápido. Segue o script.</div>
-        <ul class="diff-lista">
-          <li>O cliente sai satisfeito, mas não necessariamente volta</li>
-          <li>A equipe executa, mas não se conecta</li>
-          <li>Funciona no automático, sem presença real</li>
-          <li>O cliente percebe — mesmo sem conseguir nomear</li>
-        </ul>
-      </div>
-      <div class="diff-card bom">
-        <div class="diff-tipo">Atendimento receptivo</div>
-        <div class="diff-titulo">O cliente se sente visto, ouvido e <em>bem-vindo.</em></div>
-        <ul class="diff-lista">
-          <li>O cliente volta. E indica para outros</li>
-          <li>A equipe recebe a pessoa antes de abrir a boca</li>
-          <li>Não é sobre técnica — é sobre como a equipe está</li>
-          <li>É o que sustenta empresa de serviço a longo prazo</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CTA CENTRAL -->
-<div class="cta-final">
-  <svg class="cta-mandala" viewBox="0 0 400 400" fill="none"><g stroke="#2C1A0E" stroke-width=".7"><circle cx="200" cy="200" r="185"/><circle cx="200" cy="200" r="148"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(0 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(30 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(60 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(90 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(120 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(150 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(180 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(210 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(240 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(270 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(300 200 200)"/><ellipse cx="200" cy="55" rx="18" ry="62" transform="rotate(330 200 200)"/></g></svg>
-  <div class="cta-inner">
-    <span class="sec-label" style="color:rgba(44,26,14,.55);">Próximo passo</span>
-    <h2>Quer isso com a<br><em>sua equipe?</em></h2>
-    <p>Se você é dono ou gestor de empresa de médio porte e quer uma equipe que realmente muda o jeito de atender e se relacionar, a conversa começa aqui.</p>
-    <div class="cta-palavra">Manda a palavra: EMPRESA</div><br><br>
-    <a href="https://wa.me/5555999660224?text=EMPRESA" class="btn-escuro" target="_blank">🦋 Falar com a Simone no WhatsApp</a>
-  </div>
-</div>
-
-<!-- ══ STORIES ══ -->
-<div class="stories-wrap" id="stories">
-  <div class="stories-header">
-    <span class="sec-label">10 ideias de sequências</span>
-    <h2 class="sec-titulo" style="color:var(--branco);margin-bottom:8px;">Stories para o <em>próximo mês</em></h2>
-    <p style="font-size:14px;color:rgba(255,255,255,.45);line-height:1.6;">Cada sequência tem 5 stories. As marcadas com ❓ incluem caixinha de perguntas.</p>
+  <!-- Mandala fundo -->
+  <div style="position:absolute;top:50%;left:50%;width:700px;height:700px;opacity:.025;pointer-events:none;transform:translate(-50%,-50%);">
+    <svg viewBox="0 0 500 500" fill="none" style="width:100%;height:100%;animation:spinrf 110s linear infinite;"><g stroke="#F5A623" stroke-width=".4"><circle cx="250" cy="250" r="240"/><circle cx="250" cy="250" r="190"/><circle cx="250" cy="250" r="140"/><circle cx="250" cy="250" r="90"/><ellipse cx="250" cy="68" rx="20" ry="68" transform="rotate(0 250 250)"/><ellipse cx="250" cy="68" rx="20" ry="68" transform="rotate(36 250 250)"/><ellipse cx="250" cy="68" rx="20" ry="68" transform="rotate(72 250 250)"/><ellipse cx="250" cy="68" rx="20" ry="68" transform="rotate(108 250 250)"/><ellipse cx="250" cy="68" rx="20" ry="68" transform="rotate(144 250 250)"/><ellipse cx="250" cy="68" rx="20" ry="68" transform="rotate(180 250 250)"/><ellipse cx="250" cy="68" rx="20" ry="68" transform="rotate(216 250 250)"/><ellipse cx="250" cy="68" rx="20" ry="68" transform="rotate(252 250 250)"/><ellipse cx="250" cy="68" rx="20" ry="68" transform="rotate(288 250 250)"/><ellipse cx="250" cy="68" rx="20" ry="68" transform="rotate(324 250 250)"/></g></svg>
   </div>
 
-  <div class="stories-tabs" id="tabsContainer">
-    <button class="tab ativo" onclick="mostraSeq(0)">S1</button>
-    <button class="tab" onclick="mostraSeq(1)">S2 ❓</button>
-    <button class="tab" onclick="mostraSeq(2)">S3</button>
-    <button class="tab" onclick="mostraSeq(3)">S4</button>
-    <button class="tab" onclick="mostraSeq(4)">S5</button>
-    <button class="tab" onclick="mostraSeq(5)">S6 ❓</button>
-    <button class="tab" onclick="mostraSeq(6)">S7</button>
-    <button class="tab" onclick="mostraSeq(7)">S8</button>
-    <button class="tab" onclick="mostraSeq(8)">S9</button>
-    <button class="tab" onclick="mostraSeq(9)">S10</button>
+  <!-- Borboletas decorativas seqs -->
+  <div class="bfly" style="top:8%;right:4%;width:48px;animation:fl2 6s ease-in-out infinite;animation-delay:.4s;opacity:.35;">
+    <svg viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".7"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".4"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".22"/></svg>
   </div>
 
-  <div class="seq-container">
+  <div class="seqs-header reveal">
+    <span class="seqs-label">As sequências</span>
+    <h2 class="seqs-h2">10 roteiros prontos<br>para <em>publicar</em></h2>
+    <p class="seqs-sub">Cada card mostra os stories em sequência. Passe o mouse em cada story para ver o detalhamento.</p>
+  </div>
 
-    <!-- S1 -->
-    <div class="seq ativo" id="seq0">
-      <div class="seq-info">
-        <div class="seq-nome">S1 — <em>Bastidor do treinamento</em></div>
-        <div class="seq-desc">Mostrar o processo por dentro. Equipe em roda, dinâmica, vivência real.</div>
+  <div class="seqs-grid">
+
+    <!-- SEQ 01 -->
+    <div class="seq-card reveal">
+      <div class="seq-head">
+        <span class="seq-n">Seq. 01</span>
+        <div class="seq-nome">A dor que o gestor <em>não nomeia</em></div>
+        <span class="seq-obj">Reconhecimento</span>
+        <span class="seq-cta-badge">DIAGNÓSTICO</span>
       </div>
-      <div class="stories-row">
-        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Abertura · Gancho</div><div class="story-titulo">Hoje você vai ver como é por dentro um treinamento de verdade</div><div class="story-txt">Foto ou vídeo curto dela chegando no local. "Hoje tem treinamento e você vai acompanhar tudo."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Contexto</div><div class="story-titulo">Antes de qualquer coisa, eu escuto</div><div class="story-txt">Ela sentada com gestor ou equipe. "Primeiro eu entendo a realidade deles. Só depois começa."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Vivência</div><div class="story-titulo"><em>A roda começa</em></div><div class="story-txt">Vídeo da equipe em círculo. "Esse é o momento em que as pessoas param de se defender e começam a se ouvir."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Revelação</div><div class="story-titulo">O que aparece quando a equipe se permite</div><div class="story-txt">Momento de conexão — abraço, sorriso, olhar. "Aqui é onde o comportamento começa a mudar de verdade."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Quer esse processo na sua empresa?</div><div class="story-txt">Ela olhando pra câmera. "Me manda uma mensagem com a palavra EMPRESA e a gente conversa."</div><div class="story-cta">CTA: EMPRESA no direct</div></div></div>
+      <div class="seq-body">
+        <p class="seq-objetivo">Fazer o gestor se reconhecer no problema antes de apresentar a solução.</p>
+        <div class="stories-row">
+          <div class="story-frame"><div class="sf-num">Story 1</div><span class="sf-tipo">Pergunta</span><div class="sf-titulo">A provocação</div><p class="sf-desc">"Você sente que sua equipe poderia render mais, mas não sabe onde está o problema?"</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 2</div><span class="sf-tipo">Conteúdo</span><div class="sf-titulo">3 sinais</div><p class="sf-desc">3 sinais de que o problema não é técnico — é comportamental. Cliente que não volta. Clima pesado. Equipe no automático.</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 3</div><span class="sf-tipo">Virada</span><div class="sf-titulo">A virada</div><p class="sf-desc">"Comportamento e emocional também se treinam. Mas precisam de diagnóstico primeiro."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 4</div><span class="sf-tipo">CTA</span><div class="sf-titulo">O convite</div><p class="sf-desc">"Me manda DIAGNÓSTICO no direct. Vou te explicar como funciona o processo."</p><span class="sf-cta">DIAGNÓSTICO</span></div>
+        </div>
       </div>
     </div>
 
-    <!-- S2 — CAIXINHA -->
-    <div class="seq" id="seq1">
-      <div class="seq-info">
-        <div class="seq-nome">S2 — <em>Caixinha: o gestor pergunta</em></div>
-        <div class="seq-desc">Caixinha de perguntas voltada para donos e gestores. Gera engajamento e aquece leads.</div>
-        <div class="seq-badge-caixinha">Caixinha de perguntas</div>
+    <!-- SEQ 02 -->
+    <div class="seq-card reveal">
+      <div class="seq-head">
+        <span class="seq-n">Seq. 02</span>
+        <div class="seq-nome">Bastidores de <em>um treinamento</em></div>
+        <span class="seq-obj">Desejo</span>
+        <span class="seq-cta-badge">EMPRESA</span>
       </div>
-      <div class="stories-row">
-        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Abertura</div><div class="story-titulo">Todo gestor tem dúvida antes de investir em treinamento</div><div class="story-txt">Ela séria, direta. "Vou responder as suas agora. Me manda sua pergunta aqui."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Caixinha</div><div class="story-titulo"><em>Pergunta aqui:</em> o que você ainda não entendeu sobre treinamento de equipe?</div><div class="story-txt">Sticker de caixinha de perguntas aberto. Exemplos na tela: "Como funciona? Serve pra minha empresa? Quanto tempo leva?"</div><div class="story-caixinha">Caixinha aberta para gestores</div></div></div>
-        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Resposta 1</div><div class="story-titulo">Respondendo: "Serve pra qualquer empresa?"</div><div class="story-txt">"Não. Só trabalho com empresas de médio porte de serviços — porque começo pelo diagnóstico da sua realidade."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Resposta 2</div><div class="story-titulo">Respondendo: "Preciso liberar todo mundo?"</div><div class="story-txt">"Não. Os encontros são planejados junto com você pra encaixar na rotina sem travar a operação."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Ficou com dúvida? Me chama.</div><div class="story-txt">"Se você é dono ou gestor e ainda tem pergunta, me manda EMPRESA no direct. A gente conversa antes de qualquer decisão."</div><div class="story-cta">CTA: EMPRESA no direct</div></div></div>
-      </div>
-    </div>
-
-    <!-- S3 -->
-    <div class="seq" id="seq2">
-      <div class="seq-info">
-        <div class="seq-nome">S3 — <em>NR1 explicada em 5 stories</em></div>
-        <div class="seq-desc">Educar o gestor sobre a obrigação legal. Urgência real, sem alarmar.</div>
-      </div>
-      <div class="stories-row">
-        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Gancho</div><div class="story-titulo">Você sabia que a NR1 mudou em 2025?</div><div class="story-txt">"E a maioria das empresas de médio porte ainda não se adequou. Desliza pra entender."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Educação</div><div class="story-titulo">O que mudou na lei</div><div class="story-txt">"Toda empresa com CLT agora precisa identificar e gerenciar riscos psicossociais. Não é recomendação. É obrigação."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">O que inclui</div><div class="story-titulo">O que são riscos psicossociais?</div><div class="story-txt">"Assédio, sobrecarga, conflito entre equipes, clima hostil. Tudo isso precisa estar documentado e gerenciado."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Consequência</div><div class="story-titulo">O que acontece se não tiver?</div><div class="story-txt">"Multa. Ação trabalhista. E descobrir por uma fiscalização que sua equipe estava sofrendo e você não sabia."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Não sabe se sua empresa está em conformidade?</div><div class="story-txt">"Me manda NR1 no direct que eu te explico como funciona o diagnóstico."</div><div class="story-cta">CTA: NR1 no direct</div></div></div>
+      <div class="seq-body">
+        <p class="seq-objetivo">Mostrar como é na prática para gerar desejo antes de qualquer conversa sobre preço.</p>
+        <div class="stories-row">
+          <div class="story-frame"><div class="sf-num">Story 1</div><span class="sf-tipo">Bastidor</span><div class="sf-titulo">A chegada</div><p class="sf-desc">Foto ou vídeo chegando na empresa. "Aqui começa o processo."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 2</div><span class="sf-tipo">Vivência</span><div class="sf-titulo">A roda</div><p class="sf-desc">Equipe em roda. "Antes de qualquer técnica, a gente se encontra."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 3</div><span class="sf-tipo">Reação</span><div class="sf-titulo">O momento</div><p class="sf-desc">Reação de alguém no treinamento — sem narração, só o momento real.</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 4</div><span class="sf-tipo">Posição</span><div class="sf-titulo">O método</div><p class="sf-desc">"Isso não é palestra. É processo desenhado pra realidade da sua empresa."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 5</div><span class="sf-tipo">CTA</span><div class="sf-titulo">O convite</div><p class="sf-desc">"Dono ou gestor? Me manda EMPRESA no direct."</p><span class="sf-cta">EMPRESA</span></div>
+        </div>
       </div>
     </div>
 
-    <!-- S4 -->
-    <div class="seq" id="seq3">
-      <div class="seq-info">
-        <div class="seq-nome">S4 — <em>Antes e depois sem citar nomes</em></div>
-        <div class="seq-desc">Prova social. Mostrar transformação real sem expor o cliente.</div>
+    <!-- SEQ 03 -->
+    <div class="seq-card reveal">
+      <div class="seq-head">
+        <span class="seq-n">Seq. 03</span>
+        <div class="seq-nome">Caixinha de <em>perguntas</em></div>
+        <span class="seq-obj">Engajamento</span>
+        <span class="seq-cta-badge">Interação</span>
       </div>
-      <div class="stories-row">
-        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Gancho</div><div class="story-titulo">Vou te contar como essa equipe chegou — e como saiu</div><div class="story-txt">"Sem citar nomes. Só resultados. Desliza."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Antes</div><div class="story-titulo">Como chegaram no primeiro encontro</div><div class="story-txt">"Equipe travada. Respostas defensivas. Clima pesado entre setores. Liderança sobrecarregada."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">O processo</div><div class="story-titulo">O que trabalhamos em 20 horas</div><div class="story-txt">"Comportamento, emocional, receptividade, comunicação entre equipe e liderança. Na prática, não em slide."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Depois</div><div class="story-titulo"><em>Como saíram no último encontro</em></div><div class="story-txt">"Equipe mais receptiva. Clima mais leve. Atendimento mais humano. Liderança com mais respaldo."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Quer ver isso acontecer na sua empresa?</div><div class="story-txt">"Me manda EMPRESA no direct. A transformação começa com uma conversa."</div><div class="story-cta">CTA: EMPRESA no direct</div></div></div>
-      </div>
-    </div>
-
-    <!-- S5 -->
-    <div class="seq" id="seq4">
-      <div class="seq-info">
-        <div class="seq-nome">S5 — <em>Dia de treinamento ao vivo</em></div>
-        <div class="seq-desc">Cobertura em tempo real de um dia de treinamento. Humaniza e gera curiosidade.</div>
-      </div>
-      <div class="stories-row">
-        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Abertura</div><div class="story-titulo">Hoje tem treinamento. Você vai acompanhar.</div><div class="story-txt">Ela no caminho ou chegando. "Hoje a gente entra em mais uma empresa. Vou mostrar aqui como é."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Chegada</div><div class="story-titulo">Antes de começar</div><div class="story-txt">Foto do espaço ou equipe se organizando. "Cada empresa tem uma realidade diferente. Por isso começo sempre escutando."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Durante</div><div class="story-titulo"><em>A vivência acontecendo</em></div><div class="story-txt">Vídeo ou foto da dinâmica. "Esse é o momento que não tem em slide nenhum. É sentir na pele."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Encerramento</div><div class="story-titulo">Como essa equipe saiu hoje</div><div class="story-txt">Foto do grupo ao final. "Equipe diferente de como entrou. É isso que 20h de processo fazem."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Quer isso com a sua equipe?</div><div class="story-txt">"Me manda EMPRESA no direct e a gente começa pela conversa."</div><div class="story-cta">CTA: EMPRESA no direct</div></div></div>
+      <div class="seq-body">
+        <p class="seq-objetivo">Gerar interação + colher dúvidas reais que viram conteúdo futuro.</p>
+        <div class="stories-row">
+          <div class="story-frame"><div class="sf-num">Story 1</div><span class="sf-tipo">Gancho</span><div class="sf-titulo">A pergunta</div><p class="sf-desc">"Qual é o maior desafio da sua equipe hoje? Me fala aqui."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 2</div><span class="sf-tipo">Caixinha</span><div class="sf-titulo">O adesivo</div><p class="sf-desc">Adesivo de pergunta aberto. Texto em cima: "Me pergunta sobre sua equipe"</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 3</div><span class="sf-tipo">Promessa</span><div class="sf-titulo">O combinado</div><p class="sf-desc">"Vou responder todas as perguntas aqui nos stories amanhã."</p></div>
+        </div>
       </div>
     </div>
 
-    <!-- S6 — CAIXINHA -->
-    <div class="seq" id="seq5">
-      <div class="seq-info">
-        <div class="seq-nome">S6 — <em>Caixinha: sua equipe te preocupa?</em></div>
-        <div class="seq-desc">Caixinha voltada para a dor do gestor. Gera identificação e aquece para o direct.</div>
-        <div class="seq-badge-caixinha">Caixinha de perguntas</div>
+    <!-- SEQ 04 -->
+    <div class="seq-card reveal">
+      <div class="seq-head">
+        <span class="seq-n">Seq. 04</span>
+        <div class="seq-nome">NR1 em <em>3 stories</em></div>
+        <span class="seq-obj">Urgência Legal</span>
+        <span class="seq-cta-badge">NR1</span>
       </div>
-      <div class="stories-row">
-        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Gancho</div><div class="story-titulo">Se você é dono ou gestor, preciso te perguntar uma coisa</div><div class="story-txt">"Tem alguma situação com sua equipe que te preocupa mas você não sabe bem como resolver? Me conta aqui."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Caixinha</div><div class="story-titulo"><em>Me conta:</em> qual é o maior problema que você enfrenta com sua equipe hoje?</div><div class="story-txt">Sticker de caixinha aberto. Exemplos na tela: "Clima ruim? Atendimento fraco? Equipe no automático?"</div><div class="story-caixinha">Caixinha aberta para gestores</div></div></div>
-        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Resposta 1</div><div class="story-titulo">Respondendo: "Minha equipe não tem motivação"</div><div class="story-txt">"Motivação sem preparo emocional some na segunda de manhã. O que falta não é ânimo — é espaço pra aprender a se relacionar de verdade."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Resposta 2</div><div class="story-titulo">Respondendo: "O clima está muito pesado"</div><div class="story-txt">"Clima pesado é sintoma, não causa. Equipe que não se acolhe entre si não consegue acolher o cliente."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Reconheceu algum desses problemas?</div><div class="story-txt">"Me manda DIAGNÓSTICO no direct. Eu faço um raio-X da sua equipe e te mostro o que trabalhar."</div><div class="story-cta">CTA: DIAGNÓSTICO no direct</div></div></div>
-      </div>
-    </div>
-
-    <!-- S7 -->
-    <div class="seq" id="seq6">
-      <div class="seq-info">
-        <div class="seq-nome">S7 — <em>Por que o treinamento anterior não funcionou</em></div>
-        <div class="seq-desc">Educa e quebra a resistência do gestor que já investiu e não viu resultado.</div>
-      </div>
-      <div class="stories-row">
-        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Gancho</div><div class="story-titulo">Já investiu em treinamento e a equipe voltou igual?</div><div class="story-txt">"Não é culpa da equipe. E provavelmente não é culpa sua. Desliza."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Motivo 1</div><div class="story-titulo">Foi genérico</div><div class="story-txt">"Treinamento que serve pra qualquer empresa não foi feito pra sua empresa. Equipe diferente, cultura diferente, desafio diferente."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Motivo 2</div><div class="story-titulo">Parou na teoria</div><div class="story-txt">"Conteúdo sem vivência não muda atitude. Muda discurso. E discurso o cliente percebe na hora."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">O que funciona</div><div class="story-titulo"><em>Treinamento que funciona começa com diagnóstico</em></div><div class="story-txt">"Eu escuto você, entendo sua equipe e só então desenho o processo. Em média 20h, 2 encontros por semana."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Pronto pra tentar diferente?</div><div class="story-txt">"Me manda EMPRESA no direct e a gente começa do jeito certo."</div><div class="story-cta">CTA: EMPRESA no direct</div></div></div>
+      <div class="seq-body">
+        <p class="seq-objetivo">Urgência legal — capturar gestores que ainda não se adequaram à NR1.</p>
+        <div class="stories-row">
+          <div class="story-frame"><div class="sf-num">Story 1</div><span class="sf-tipo">Alerta</span><div class="sf-titulo">O aviso</div><p class="sf-desc">"Se sua empresa tem CLT e você ainda não ouviu falar da NR1 atualizada — olha isso."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 2</div><span class="sf-tipo">Conteúdo</span><div class="sf-titulo">O que exige</div><p class="sf-desc">O que a lei exige: diagnóstico, mapeamento por setor, relatório, plano de ação e documentação.</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 3</div><span class="sf-tipo">CTA</span><div class="sf-titulo">O próximo passo</div><p class="sf-desc">"Me manda NR1 no direct. Vejo se sua empresa precisa e como funciona."</p><span class="sf-cta">NR1</span></div>
+        </div>
       </div>
     </div>
 
-    <!-- S8 -->
-    <div class="seq" id="seq7">
-      <div class="seq-info">
-        <div class="seq-nome">S8 — <em>Receptividade no dia a dia</em></div>
-        <div class="seq-desc">Exemplos práticos e simples do que é receptividade. Torna o conceito real.</div>
+    <!-- SEQ 05 -->
+    <div class="seq-card reveal">
+      <div class="seq-head">
+        <span class="seq-n">Seq. 05</span>
+        <div class="seq-nome">Antes e depois do <em>diagnóstico</em></div>
+        <span class="seq-obj">Transformação</span>
+        <span class="seq-cta-badge">DIAGNÓSTICO</span>
       </div>
-      <div class="stories-row">
-        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Gancho</div><div class="story-titulo">Receptividade não é simpatia. Vou te mostrar a diferença.</div><div class="story-txt">"São coisas parecidas mas que produzem resultados completamente diferentes. Desliza."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Exemplo 1</div><div class="story-titulo">Simpático responde. <em>Receptivo escuta antes.</em></div><div class="story-txt">"O funcionário simpático sorri e resolve. O receptivo percebe o estado do cliente antes de abrir a boca."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Exemplo 2</div><div class="story-titulo">Simpático atende. <em>Receptivo acolhe.</em></div><div class="story-txt">"Atender é executar. Acolher é fazer a pessoa se sentir bem-vinda. Só o segundo fideliza."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">A virada</div><div class="story-titulo">Receptividade se treina — não é dom</div><div class="story-txt">"Sua equipe pode aprender isso. Com o processo certo, dentro da realidade da sua empresa."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Quer saber onde sua equipe está nisso?</div><div class="story-txt">"Me manda DIAGNÓSTICO no direct."</div><div class="story-cta">CTA: DIAGNÓSTICO no direct</div></div></div>
-      </div>
-    </div>
-
-    <!-- S9 -->
-    <div class="seq" id="seq8">
-      <div class="seq-info">
-        <div class="seq-nome">S9 — <em>Com quem eu trabalho</em></div>
-        <div class="seq-desc">Posicionamento. Filtra o lead certo e afasta o errado.</div>
-      </div>
-      <div class="stories-row">
-        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Abertura</div><div class="story-titulo">Não trabalho com todo mundo. E vou ser direta sobre isso.</div><div class="story-txt">"Ser clara sobre com quem trabalho respeita o seu tempo e o meu. Desliza."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Sim</div><div class="story-titulo"><em>Trabalho com você se…</em></div><div class="story-txt">"Você tem empresa de médio porte de serviços, valoriza pessoas e quer mudança real de comportamento, não só cumprir tabela."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Não</div><div class="story-titulo">Não trabalho com você se…</div><div class="story-txt">"Você quer palestra pontual, acha que o problema é só a equipe ser preguiçosa ou quer resultado em um encontro."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Por quê</div><div class="story-titulo">Por que sou direta nisso?</div><div class="story-txt">"Resultado de verdade exige processo. Empresa que entra sem essa compreensão não evolui — e isso não serve pra ninguém."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Se você se reconheceu no grupo certo…</div><div class="story-txt">"Me chama no direct. Vamos conversar sobre sua equipe."</div><div class="story-cta">CTA: direct</div></div></div>
+      <div class="seq-body">
+        <p class="seq-objetivo">Mostrar transformação concreta para reduzir a objeção "minha equipe é diferente".</p>
+        <div class="stories-row">
+          <div class="story-frame"><div class="sf-num">Story 1</div><span class="sf-tipo">Antes</span><div class="sf-titulo">O problema</div><p class="sf-desc">"Equipe no automático: resolve, entrega, vai embora. Clima pesado, atendimento frio."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 2</div><span class="sf-tipo">Depois</span><div class="sf-titulo">A mudança</div><p class="sf-desc">"Mesma equipe depois do processo: presença, acolhimento, cliente que volta e indica."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 3</div><span class="sf-tipo">Método</span><div class="sf-titulo">O nó</div><p class="sf-desc">"A mudança começa pelo diagnóstico. Eu vejo onde está o nó antes de propor qualquer coisa."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 4</div><span class="sf-tipo">CTA</span><div class="sf-titulo">O convite</div><p class="sf-desc">"Me manda DIAGNÓSTICO no direct."</p><span class="sf-cta">DIAGNÓSTICO</span></div>
+        </div>
       </div>
     </div>
 
-    <!-- S10 -->
-    <div class="seq" id="seq9">
-      <div class="seq-info">
-        <div class="seq-nome">S10 — <em>O que muda na prática</em></div>
-        <div class="seq-desc">Mostrar resultados concretos e tangíveis para o gestor. Fecha o ciclo de histórias do mês.</div>
+    <!-- SEQ 06 -->
+    <div class="seq-card reveal">
+      <div class="seq-head">
+        <span class="seq-n">Seq. 06</span>
+        <div class="seq-nome">O que <em>não</em> é meu trabalho</div>
+        <span class="seq-obj">Posicionamento</span>
+        <span class="seq-cta-badge">EMPRESA</span>
       </div>
-      <div class="stories-row">
-        <div class="story-card"><div class="story-num">Story 1</div><div class="story-body"><div class="story-tipo">Gancho</div><div class="story-titulo">O gestor sempre me pergunta: o que muda de verdade?</div><div class="story-txt">"Vou te contar o que acontece depois que o processo termina. Desliza."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 2</div><div class="story-body"><div class="story-tipo">Resultado 1</div><div class="story-titulo">A equipe para de se defender</div><div class="story-txt">"Em vez de "cliente reclama de tudo", a equipe começa a se perguntar: o que eu posso fazer diferente? Essa virada muda tudo."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 3</div><div class="story-body"><div class="story-tipo">Resultado 2</div><div class="story-titulo"><em>O clima muda — e o cliente percebe</em></div><div class="story-txt">"Equipe que se acolhe entre si acolhe o cliente. Clima leve não é sorte. É gestão da receptividade."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 4</div><div class="story-body"><div class="story-tipo">Resultado 3</div><div class="story-titulo">O gestor descansa mais</div><div class="story-txt">"Quando a equipe aprende a se relacionar melhor, o gestor para de apagar incêndio o tempo todo. Sobra energia pra pensar no negócio."</div></div></div>
-        <div class="story-card"><div class="story-num">Story 5</div><div class="story-body"><div class="story-tipo">CTA</div><div class="story-titulo">Quer esses resultados?</div><div class="story-txt">"Me manda EMPRESA no direct. A conversa não compromete nada — só abre caminho."</div><div class="story-cta">CTA: EMPRESA no direct</div></div></div>
+      <div class="seq-body">
+        <p class="seq-objetivo">Posicionar com clareza, filtrar cliente errado e atrair o gestor certo.</p>
+        <div class="stories-row">
+          <div class="story-frame"><div class="sf-num">Story 1</div><span class="sf-tipo">Não é</span><div class="sf-titulo">O que não faço</div><p class="sf-desc">"Não faço palestra de motivação. Não vendo curso online. Não atendo empresa pequena."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 2</div><span class="sf-tipo">É</span><div class="sf-titulo">O que faço</div><p class="sf-desc">"Faço diagnóstico + processo completo. Presencial. Desenhado pra realidade da sua empresa."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 3</div><span class="sf-tipo">Perfil</span><div class="sf-titulo">Pra quem é</div><p class="sf-desc">"Atendo dono ou gestor de empresa de médio porte de serviços que quer mudança real."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 4</div><span class="sf-tipo">CTA</span><div class="sf-titulo">O filtro</div><p class="sf-desc">"É o seu perfil? Me manda EMPRESA no direct e a gente conversa."</p><span class="sf-cta">EMPRESA</span></div>
+        </div>
       </div>
     </div>
 
-  </div><!-- /seq-container -->
-</div><!-- /stories-wrap -->
+    <!-- SEQ 07 -->
+    <div class="seq-card reveal">
+      <div class="seq-head">
+        <span class="seq-n">Seq. 07</span>
+        <div class="seq-nome">Respondendo <em>perguntas reais</em></div>
+        <span class="seq-obj">Autoridade</span>
+        <span class="seq-cta-badge">DIRECT</span>
+      </div>
+      <div class="seq-body">
+        <p class="seq-objetivo">Usar perguntas reais da caixinha para mostrar autoridade e gerar mais leads.</p>
+        <div class="stories-row">
+          <div class="story-frame"><div class="sf-num">Story 1</div><span class="sf-tipo">Intro</span><div class="sf-titulo">A abertura</div><p class="sf-desc">"Recebi várias perguntas essa semana. Vou responder as principais aqui."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 2</div><span class="sf-tipo">Resposta 1</span><div class="sf-titulo">Pergunta + resposta</div><p class="sf-desc">Pergunta do seguidor em destaque + resposta direta em vídeo ou texto. Escolha a mais estratégica.</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 3</div><span class="sf-tipo">Resposta 2</span><div class="sf-titulo">Segunda pergunta</div><p class="sf-desc">Segunda pergunta + resposta. Priorize dúvidas sobre NR1, diagnóstico ou como funciona.</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 4</div><span class="sf-tipo">CTA</span><div class="sf-titulo">O encerramento</div><p class="sf-desc">"Mais dúvida? Me manda no direct — DIAGNÓSTICO, EMPRESA ou NR1."</p><span class="sf-cta outline">DIRECT</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEQ 08 -->
+    <div class="seq-card reveal">
+      <div class="seq-head">
+        <span class="seq-n">Seq. 08</span>
+        <div class="seq-nome">O que é <em>receptividade</em> na prática</div>
+        <span class="seq-obj">Educação</span>
+        <span class="seq-cta-badge">DIAGNÓSTICO</span>
+      </div>
+      <div class="seq-body">
+        <p class="seq-objetivo">Educar o conceito central de forma simples — atender x acolher.</p>
+        <div class="stories-row">
+          <div class="story-frame"><div class="sf-num">Story 1</div><span class="sf-tipo">Gancho</span><div class="sf-titulo">A provocação</div><p class="sf-desc">"Você sabe a diferença entre atender e acolher? Deixa eu te mostrar."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 2</div><span class="sf-tipo">Lado A</span><div class="sf-titulo">Atender</div><p class="sf-desc">"Atender: resolve o problema, responde rápido, segue o script."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 3</div><span class="sf-tipo">Lado B</span><div class="sf-titulo">Acolher</div><p class="sf-desc">"Acolher: o cliente se sente visto antes mesmo de pedir alguma coisa."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 4</div><span class="sf-tipo">Impacto</span><div class="sf-titulo">O resultado</div><p class="sf-desc">"Só o segundo fideliza. E fidelização é o que sustenta empresa de serviço."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 5</div><span class="sf-tipo">CTA</span><div class="sf-titulo">A escala</div><p class="sf-desc">"Sua equipe atende ou acolhe? Me manda DIAGNÓSTICO."</p><span class="sf-cta">DIAGNÓSTICO</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEQ 09 -->
+    <div class="seq-card reveal">
+      <div class="seq-head">
+        <span class="seq-n">Seq. 09</span>
+        <div class="seq-nome">Um dia de <em>vivência</em> com a equipe</div>
+        <span class="seq-obj">Desejo + Prova</span>
+        <span class="seq-cta-badge">EMPRESA</span>
+      </div>
+      <div class="seq-body">
+        <p class="seq-objetivo">Mostrar o método vivencial na prática — gerar desejo antes de apresentar valor.</p>
+        <div class="stories-row">
+          <div class="story-frame"><div class="sf-num">Story 1</div><span class="sf-tipo">Abertura</span><div class="sf-titulo">O dia começa</div><p class="sf-desc">"Hoje tem treinamento. Mostrando como é por dentro."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 2</div><span class="sf-tipo">Momento 1</span><div class="sf-titulo">A conexão</div><p class="sf-desc">Equipe chegando, roda de apresentação. "Antes de qualquer conteúdo, conexão."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 3</div><span class="sf-tipo">Momento 2</span><div class="sf-titulo">A dinâmica</div><p class="sf-desc">Dinâmica acontecendo. "Balões, contagem coletiva, espaço seguro. Vivência."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 4</div><span class="sf-tipo">Encerramento</span><div class="sf-titulo">A mudança</div><p class="sf-desc">"A equipe que veio tensa saiu diferente. Não é magia — é processo."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 5</div><span class="sf-tipo">CTA</span><div class="sf-titulo">O convite</div><p class="sf-desc">"Quer isso pra sua empresa? Me manda EMPRESA no direct."</p><span class="sf-cta">EMPRESA</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEQ 10 -->
+    <div class="seq-card reveal">
+      <div class="seq-head">
+        <span class="seq-n">Seq. 10</span>
+        <div class="seq-nome">Prova social em <em>formato de história</em></div>
+        <span class="seq-obj">Conversão</span>
+        <span class="seq-cta-badge">DIAGNÓSTICO</span>
+      </div>
+      <div class="seq-body">
+        <p class="seq-objetivo">Usar resultado de cliente real para converter quem ainda está em dúvida. Só use com caso concreto.</p>
+        <div class="stories-row">
+          <div class="story-frame"><div class="sf-num">Story 1</div><span class="sf-tipo">Contexto</span><div class="sf-titulo">O cenário</div><p class="sf-desc">"Uma empresa de [setor]. O gestor me chamou com uma queixa clássica."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 2</div><span class="sf-tipo">Problema</span><div class="sf-titulo">A dor real</div><p class="sf-desc">"A equipe atendia bem. Mas o clima estava pesado e o cliente não voltava."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 3</div><span class="sf-tipo">Processo</span><div class="sf-titulo">O diagnóstico</div><p class="sf-desc">"O diagnóstico revelou o nó. Não era técnica — era como a equipe se relacionava."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 4</div><span class="sf-tipo">Resultado</span><div class="sf-titulo">A virada</div><p class="sf-desc">"Depois do processo: clima diferente, cliente fidelizado, gestor aliviado."</p></div>
+          <div class="s-arrow"><svg width="16" height="16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="story-frame"><div class="sf-num">Story 5</div><span class="sf-tipo">CTA</span><div class="sf-titulo">O espelho</div><p class="sf-desc">"Reconhece sua empresa nessa história? Me manda DIAGNÓSTICO."</p><span class="sf-cta">DIAGNÓSTICO</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ DICAS ESTRATÉGICAS ══ -->
+<section class="dica">
+  <div style="position:absolute;bottom:-40px;left:-40px;width:280px;height:280px;opacity:.06;pointer-events:none;">
+    <svg viewBox="0 0 400 400" fill="none" style="width:100%;height:100%;animation:spinf 65s linear infinite;"><g stroke="#F5A623" stroke-width=".7"><circle cx="200" cy="200" r="190"/><circle cx="200" cy="200" r="140"/><circle cx="200" cy="200" r="90"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(0 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(60 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(120 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(180 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(240 200 200)"/><ellipse cx="200" cy="65" rx="16" ry="55" transform="rotate(300 200 200)"/></g></svg>
+  </div>
+  <div class="dica-inner">
+    <span class="sec-label" style="color:rgba(245,166,35,.6);">Estratégia</span>
+    <h2 class="sec-h2" style="color:#fff;">3 regras para<br><em>publicar certo</em></h2>
+    <div class="dica-grid reveal">
+      <div class="dica-card">
+        <div class="dica-ico">🦋</div>
+        <div class="dica-titulo">Não abra a caixinha <em>sem audiência</em></div>
+        <p class="dica-txt">Se ainda não tem engajamento alto, use o formato "me perguntaram" — você escolhe a pergunta e responde. Parece caixinha, mas tem controle total do conteúdo.</p>
+      </div>
+      <div class="dica-card">
+        <div class="dica-ico">◎</div>
+        <div class="dica-titulo">A seq. 10 só funciona com <em>caso real</em></div>
+        <p class="dica-txt">Prova social genérica não converte. Antes de usar, confirme com a Simone se tem um caso concreto — setor, problema real, resultado real. Sem isso, é melhor não usar.</p>
+      </div>
+      <div class="dica-card">
+        <div class="dica-ico">✦</div>
+        <div class="dica-titulo">Um CTA por sequência, <em>sempre</em></div>
+        <p class="dica-txt">Nunca coloque dois CTAs na mesma sequência. O gestor precisa saber exatamente o que fazer — DIAGNÓSTICO, EMPRESA ou NR1. Dividir a atenção divide a conversão.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA FINAL ══ -->
+<section class="cta-fim">
+  <!-- Mandalas -->
+  <div style="position:absolute;top:50%;left:50%;width:600px;height:600px;opacity:.04;pointer-events:none;transform:translate(-50%,-50%);">
+    <svg viewBox="0 0 500 500" fill="none" style="width:100%;height:100%;animation:spinf 90s linear infinite;"><g stroke="#F5A623" stroke-width=".5"><circle cx="250" cy="250" r="240"/><circle cx="250" cy="250" r="185"/><circle cx="250" cy="250" r="130"/><ellipse cx="250" cy="70" rx="18" ry="65" transform="rotate(0 250 250)"/><ellipse cx="250" cy="70" rx="18" ry="65" transform="rotate(30 250 250)"/><ellipse cx="250" cy="70" rx="18" ry="65" transform="rotate(60 250 250)"/><ellipse cx="250" cy="70" rx="18" ry="65" transform="rotate(90 250 250)"/><ellipse cx="250" cy="70" rx="18" ry="65" transform="rotate(120 250 250)"/><ellipse cx="250" cy="70" rx="18" ry="65" transform="rotate(150 250 250)"/><ellipse cx="250" cy="70" rx="18" ry="65" transform="rotate(180 250 250)"/><ellipse cx="250" cy="70" rx="18" ry="65" transform="rotate(210 250 250)"/><ellipse cx="250" cy="70" rx="18" ry="65" transform="rotate(240 250 250)"/><ellipse cx="250" cy="70" rx="18" ry="65" transform="rotate(270 250 250)"/><ellipse cx="250" cy="70" rx="18" ry="65" transform="rotate(300 250 250)"/><ellipse cx="250" cy="70" rx="18" ry="65" transform="rotate(330 250 250)"/></g></svg>
+  </div>
+  <!-- Borboletas CTA -->
+  <div class="bfly" style="top:12%;left:6%;width:54px;animation:fl3 5s ease-in-out infinite;animation-delay:.6s;">
+    <svg viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623" opacity=".55"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".38"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".22"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".12"/></svg>
+  </div>
+  <div class="bfly" style="bottom:14%;right:5%;width:42px;animation:fl1 7s ease-in-out infinite;animation-delay:2.5s;">
+    <svg viewBox="0 0 80 60" fill="none"><path d="M40 30 Q20 5 5 15 Q0 30 20 35 Q30 38 40 30Z" fill="#F5A623" opacity=".45"/><path d="M40 30 Q60 5 75 15 Q80 30 60 35 Q50 38 40 30Z" fill="#F5A623" opacity=".3"/><path d="M40 30 Q22 50 8 44 Q4 30 22 28 Q31 27 40 30Z" fill="#F5A623" opacity=".18"/><path d="M40 30 Q58 50 72 44 Q76 30 58 28 Q49 27 40 30Z" fill="#F5A623" opacity=".1"/></svg>
+  </div>
+
+  <div class="cta-fim-inner reveal">
+    <h2>Pronto para<br><em>publicar?</em></h2>
+    <p>Escolha a sequência certa para a semana, adapte o texto para a voz dela e manda. O CTA já está no roteiro.</p>
+    <div class="cta-btns">
+      <a href="https://instagram.com/simonewelterb" target="_blank" class="btn-y">Ver no Instagram</a>
+      <a href="#seqs" class="btn-o">Voltar às sequências</a>
+    </div>
+  </div>
+</section>
 
 <footer>
-  <p><strong>Simone Welter Bicca</strong> · @simonewelterb · Gestão da Receptividade e Bem-Estar Corporativo</p>
+  <div class="foot-logo">Simone Welter <em>Bicca</em></div>
+  <div class="foot-txt">Gestão da Receptividade · @simonewelterb</div>
+  <a href="https://instagram.com/simonewelterb" class="foot-ig">@simonewelterb</a>
 </footer>
 
-</div><!-- /pg -->
+</div>
 
 <script>
-function mostraSeq(n) {
-  document.querySelectorAll('.seq').forEach((s,i) => s.classList.toggle('ativo', i===n));
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('ativo', i===n));
-}
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+    });
+  },{threshold:.1});
+  els.forEach(function(el){io.observe(el);});
+})();
 </script>
 </body>
 </html>
